@@ -1,5 +1,5 @@
 package com.commercecapstone.transactiontriggertracker.controller;
 
-public class StateTriggerController {
+public class TriggerController {
 
 }
