@@ -1,5 +1,5 @@
 package com.commercecapstone.transactiontriggertracker.dao;
 
-public class TransactionDao {
+public class NotificationDao {
 	//to be implemented
 }
