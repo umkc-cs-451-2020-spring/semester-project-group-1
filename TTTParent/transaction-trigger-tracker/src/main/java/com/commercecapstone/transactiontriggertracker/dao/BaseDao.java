@@ -28,8 +28,6 @@ public class BaseDao {
         return dataSource;
     }
     
-	//TODO Implement DAO Manager
-	/*
     public DataSourceTransactionManager getTransactionManager() {
         return this.daoManager.getTransactionManager();
     }
@@ -37,5 +35,4 @@ public class BaseDao {
     public DaoManager getDaoManager() {
         return this.daoManager;
     }
-    */
 }

@@ -1,1 +1,6 @@
-
+spring:
+   datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    password: group-01
+    url: commercemonitor.mariadb.database.azure.com
+    username:  cs451@commercemonitor
