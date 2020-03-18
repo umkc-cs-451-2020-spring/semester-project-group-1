@@ -6,9 +6,9 @@ import lombok.Builder;
 
 
 @Data @AllArgsConstructor @Builder
-public class StateTriggerDomain {
+public class TimeRangeTriggerDomain {
 	private int triggerID;
 	private int userID;
-	private String stateRule;
+	private String timeRangeRule;
 	private String description;
 }
