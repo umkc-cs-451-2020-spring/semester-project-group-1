@@ -46,7 +46,6 @@ public class NotificationDao extends BaseDao{
             
     }
     
-    //public NotificationDomain getSandboxBuild(int appID, int sandboxID) {}
     
     public ResponseEntity<Object> addNotification(Map<String, Object> inputParams){
 
@@ -75,14 +74,38 @@ public class NotificationDao extends BaseDao{
         
     
     }
-    /** Deletes the build from the database completely
+    /** Deletes the notification from the database completely
      * 
      * @param int notificationId
      * @return  ResponseEntity
      */
     public ResponseEntity<Object> deleteNotification(int notificationID) {
         
-        //to be implemented
+        String delNotification = "delete from Notification where NotificationID = :inNotificationID";
+        
+        Map<String, Object> params = new HashMap<String,Object>();
+        params.put("inNotificationID", notificationID);
+        
+        
+        try {
+            get().update(delNotification, params);
+            log.info("Deleted Notification ID: {} ", notificationID);
+            return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
+        } catch(NullPointerException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<Object>(HttpStatus.I_AM_A_TEAPOT);
+        }
+        catch(DataAccessException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<Object>(HttpStatus.I_AM_A_TEAPOT);
+        }
+        catch(Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+            return new ResponseEntity<Object>(HttpStatus.I_AM_A_TEAPOT);
+        }
         
     }
 
