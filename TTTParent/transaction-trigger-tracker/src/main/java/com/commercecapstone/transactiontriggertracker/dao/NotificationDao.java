@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Repository @Slf4j
 public class NotificationDao extends BaseDao{
 	@Autowired
-    NotificationRowMapper notificationMapper;//appMapper -> notificationMapper
+    NotificationRowMapper notificationMapper;//appMapper changed as notificationMapper
     
     /** Gets all the notifications from the Notification Table
      * 
@@ -23,11 +23,11 @@ public class NotificationDao extends BaseDao{
     public List<NotificationDomain> getAllNotifications() {
         List<NotificationDomain> notificationList = new ArrayList<>();
         
-        String typeQuery = "select * from Notification";//Check table name?
+        String typeQuery = "select * from Notification";
                 
         try {
             notificationList = get().query(typeQuery, notificationMapper);
-            log.info("Application table successfully retrieved");
+            log.info("Notification table successfully retrieved");
         } 
         catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -45,16 +45,16 @@ public class NotificationDao extends BaseDao{
         return notificationList;
             
     }
-    
+    //get and update methods were not implemented for notifications
     
     public ResponseEntity<Object> addNotification(Map<String, Object> inputParams){
 
-        String typeQuery = "INSERT INTO Notification(NotificationID, TransactionID, NotificationType, NotificationDescripton) " +
-                "VALUES (:inputNotificationID, :inputTransactionID, :inputNotificationType, :inputNotificationDescripton)" + 
-                "ON DUPLICATE KEY UPDATE NotificationID = :inputNotificationID, TransactionID = :inputTransactionID, NotificationType = :inputNotificationType, NotificationDescripton = :inputNotificationDescripton; " ;
+        String typeQuery = "INSERT INTO Notification(Notification_ID, Transaction_ID, Notification_type, Notification_descripton) " +
+                "VALUES (:inputNotification_ID, :inputTransaction_ID, :inputNotification_type, :inputNotification_descripton) " + 
+                "ON DUPLICATE KEY UPDATE Notification_ID = :inputNotification_ID, Transaction_ID = :inputTransaction_ID, Notification_type = :inputNotification_type, Notification_descripton = :inputNotification_descripton; " ;
         try {
             get().update(typeQuery, inputParams);
-            log.info("Notification ID: {} successfully added", inputParams.get("inputNotificationID"));
+            log.info("Notification ID: {} successfully added", inputParams.get("inputNotification_ID"));
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         }  catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -81,10 +81,10 @@ public class NotificationDao extends BaseDao{
      */
     public ResponseEntity<Object> deleteNotification(int notificationID) {
         
-        String delNotification = "delete from Notification where NotificationID = :inNotificationID";
+        String delNotification = "delete from Notification where Notification_ID = :inputNotification_ID";
         
         Map<String, Object> params = new HashMap<String,Object>();
-        params.put("inNotificationID", notificationID);
+        params.put("inputNotification_ID", notificationID);
         
         
         try {

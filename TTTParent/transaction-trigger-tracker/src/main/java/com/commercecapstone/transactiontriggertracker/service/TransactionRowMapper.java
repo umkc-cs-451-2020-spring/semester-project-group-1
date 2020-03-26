@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import com.commercecapstone.transactiontriggertracker.domain.NotificationDomain;
 import com.commercecapstone.transactiontriggertracker.domain.TransactionDomain;
 
 import lombok.*;
@@ -14,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 @Service @Data @Slf4j
-public class TransactionRowMapper {
+public class TransactionRowMapper  implements RowMapper<TransactionDomain> {
 	//@Override //mapRow method is not overridden
     public TransactionDomain mapRow(ResultSet rs, int rowNum) throws SQLException{
         return TransactionDomain.builder()
