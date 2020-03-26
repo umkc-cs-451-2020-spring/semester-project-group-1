@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "TTT-Frontend"
+  "defaultProject": "TTT-Frontend",
+  "cli": {
+    "analytics": "316b331d-1c09-433c-8d72-b29a76db8cf2"
+  }
 }
