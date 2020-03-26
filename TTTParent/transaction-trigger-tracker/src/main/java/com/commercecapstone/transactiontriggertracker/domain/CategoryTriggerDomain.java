@@ -1,16 +1,13 @@
 package com.commercecapstone.transactiontriggertracker.domain;
 
-public class StateTriggerDomain {
-	
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
-
 @Data @AllArgsConstructor @Builder
-public class StateTriggerDomain {
-	private int triggerID;
+public class CategoryTriggerDomain {
 	private int userID;
-	private String stateRule;
+	private int triggerID;
+	private String categoryRule;
 	private String description;
 }
