@@ -2,8 +2,70 @@
 </div>
 <div class = "container"><h2> Login to your account</h2></div>
 
+<div class="container2">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your email</mat-label>
+    <input matInput placeholder="Email Address" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
 
-<div class="login-content">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
+      </mat-form-field>
+</div>
+
+<div class="container2">
+<mat-checkbox>Remember me!</mat-checkbox>
+</div>
+
+  <div class="container2">
+  <div class= "links"><label>
+    Forgot your password?
+</label></div>
+</div>
+
+<div class="container2">
+<div class= "links"><label>
+    Need an account?
+</label></div><br>
+</div>
+
+  <div class="container3">
+    <button mat-raised-button color="#393F3A">Log In</button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="login-content">
     <mat-card>
         <form class="login-form">
 
@@ -31,4 +93,4 @@
               </div>
         </form>
     </mat-card>
-</div>
+</div> -->
