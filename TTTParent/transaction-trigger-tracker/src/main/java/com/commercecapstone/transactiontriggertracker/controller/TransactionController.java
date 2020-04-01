@@ -62,7 +62,7 @@ public class TransactionController {
 		return transactionDAO.updateBuildEntry(transaction);
 	}
 	
-	// Delete a Transaction
+	// Delete a Transaction based on transaction ID
 	@DeleteMapping("/{transactionID")
     public ResponseEntity<Object> deleteTransaction(@PathVariable int transactionID) {
 		return transactionDAO.deleteTransaction(transactionID);
