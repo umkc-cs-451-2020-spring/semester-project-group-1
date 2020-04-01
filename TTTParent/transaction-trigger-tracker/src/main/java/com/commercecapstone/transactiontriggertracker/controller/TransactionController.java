@@ -43,7 +43,7 @@ public class TransactionController {
 	
 	// Add a Transaction
 	@PostMapping("/all")
-	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain transacion){
+	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain transaction){
 		Map<String, Object> inputParams = new HashMap<String,Object>();
 		inputParams.put("inputTransaction_ID", transaction.getTransactionID());
 		inputParams.put("inputTransaction_type", transaction.getTransactionType());
