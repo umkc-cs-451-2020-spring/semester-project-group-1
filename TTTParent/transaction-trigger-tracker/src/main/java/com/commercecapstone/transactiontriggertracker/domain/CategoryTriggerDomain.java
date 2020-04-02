@@ -8,6 +8,5 @@ import lombok.Builder;
 public class CategoryTriggerDomain {
 	private int userID;
 	private int triggerID;
-	private String categoryRule;
-	private String description;
+	private String rule;
 }

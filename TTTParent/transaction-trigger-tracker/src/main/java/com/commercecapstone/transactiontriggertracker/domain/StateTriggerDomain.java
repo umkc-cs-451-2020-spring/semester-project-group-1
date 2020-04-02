@@ -9,6 +9,5 @@ import lombok.Builder;
 public class StateTriggerDomain {
 	private int triggerID;
 	private int userID;
-	private String stateRule;
-	private String description;
+	private String rule;
 }
