@@ -13,23 +13,23 @@ import com.commercecapstone.transactiontriggertracker.service.*;
 import lombok.extern.slf4j.Slf4j;
 
 @Repository @Slf4j
-public class StateTriggerDao extends BaseDao{
+public class CategoryTriggerDAO extends BaseDao{
 	
 	@Autowired
-	StateTriggerRowMapper stateMapper;
+	CategoryTriggerRowMapper categoryMapper;
 	
-	 /** Gets all the State Triggers
+	 /** Gets all the Category Triggers
      * 
-     * @return List of State Triggers
+     * @return List of CategoryTriggerDomain
      */
-    public List<StateTriggerDomain> getAllStateTriggers() {
-        List<StateTriggerDomain> stateTriggerList = new ArrayList<>();
+    public List<CategoryTriggerDomain> getAllCategoryTriggers() {
+        List<CategoryTriggerDomain> categoryTriggerList = new ArrayList<>();
         
-        String typeQuery = "select * from state_trigger";
+        String typeQuery = "select * from category_trigger";
                 
         try {
-            stateTriggerList = get().query(typeQuery, stateMapper);
-            log.info("State trigger table successfully retrieved");
+            categoryTriggerList = get().query(typeQuery, categoryMapper);
+            log.info("Category trigger table successfully retrieved");
         } 
         catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -44,23 +44,23 @@ public class StateTriggerDao extends BaseDao{
             e.printStackTrace();
         }
 
-        return stateTriggerList;
+        return categoryTriggerList;
             
     }
     
-    /** Gets all the triggers for a specific user
+    /** Gets all the category triggers for a specific user
      * 
      */
-    public List<StateTriggerDomain> getUserStateTriggers(int inputUserID) {
-        List<StateTriggerDomain> userStateTriggers = null;
+    public List<CategoryTriggerDomain> getUserCategoryTriggers(int inputUserID) {
+        List<CategoryTriggerDomain> userCategoryTriggers = null;
         
-        String typeQuery = "select * from State_trigger where User_ID = :inUserID";
+        String typeQuery = "select * from Category_trigger where User_ID = :inUserID";
         HashMap<String,Object> params = new HashMap<String,Object>();
         params.put("inUserID", inputUserID);
         
         try {
-        	userStateTriggers = get().query(typeQuery, params, stateMapper);
-            log.info("State triggers for UserID {} successfully retrieved", inputUserID);
+        	userCategoryTriggers = get().query(typeQuery, params, categoryMapper);
+            log.info("Category triggers for UserID {} successfully retrieved", inputUserID);
         }
         catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -75,15 +75,15 @@ public class StateTriggerDao extends BaseDao{
             e.printStackTrace();
         }
         
-        return userStateTriggers;
+        return userCategoryTriggers;
      }
     
     /*
-     * Adds an inputted user's state trigger
+     * Adds an inputted user's category trigger
      */
-    public ResponseEntity<Object> addStateTrigger(StateTriggerDomain inputTrigger){
+    public ResponseEntity<Object> addCategoryTrigger(CategoryTriggerDomain inputTrigger){
 
-        String typeQuery = "INSERT INTO State_Trigger(User_ID, Trigger_Rule) " +
+        String typeQuery = "INSERT INTO Category_trigger(User_ID, Trigger_Rule) " +
                 "VALUES (:inUserID, :inTriggerRule)";
         Map<String, Object> inputTriggerParams = new HashMap<String, Object>();
         inputTriggerParams.put("inUserID", inputTrigger.getUserID());
@@ -113,11 +113,11 @@ public class StateTriggerDao extends BaseDao{
     }
     
 	/*
-	 * Updates a user's state trigger.
+	 * Updates a user's category trigger.
 	 */
-	public ResponseEntity<Object> updateStateTrigger(StateTriggerDomain inputTrigger) {
+	public ResponseEntity<Object> updateCategoryTrigger(CategoryTriggerDomain inputTrigger) {
 	
-	        String typeQuery = "update State_trigger set trigger_rule = :inStateRule"
+	        String typeQuery = "update Category_trigger set trigger_rule = :inStateRule"
 	                		+ "WHERE Trigger_ID = :inTriggerID AND User_ID = :inUserID";
 	        
 	        Map<String, Object> params = new HashMap<String,Object>();
@@ -126,7 +126,7 @@ public class StateTriggerDao extends BaseDao{
 	        params.put("inUserID", inputTrigger.getUserID());
 	        try {
 	            get().update(typeQuery, params);
-	            log.info("State Trigger for UserID {} successfully updated with rule: {}", inputTrigger.getUserID(), inputTrigger.getRule());
+	            log.info("Category Trigger for UserID {} successfully updated with rule: {}", inputTrigger.getUserID(), inputTrigger.getRule());
 	            return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
 	        } catch (NullPointerException e) {
 	            log.error(e.getMessage());
@@ -146,11 +146,11 @@ public class StateTriggerDao extends BaseDao{
 	        
 	    }
     /** 
-     * Deletes a user's state trigger.
+     * Deletes a user's category trigger.
      */
-    public ResponseEntity<Object> deleteStateTrigger(int triggerID, int userID) {
+    public ResponseEntity<Object> deleteCategoryTrigger(int triggerID, int userID) {
         
-        String typeQuery = "delete from State_trigger where trigger_ID = :inTriggerID and User_ID = :inUserID";
+        String typeQuery = "delete from Category_trigger where trigger_ID = :inTriggerID and User_ID = :inUserID";
         
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("inTriggerID", triggerID);
@@ -159,7 +159,7 @@ public class StateTriggerDao extends BaseDao{
         
         try {
             get().update(typeQuery, params);
-            log.info("Deleted State Trigger with UserID {} and TriggerID {}", userID, triggerID);
+            log.info("Deleted Category Trigger with UserID {} and TriggerID {}", userID, triggerID);
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         } catch(NullPointerException e) {
             log.error(e.getMessage());

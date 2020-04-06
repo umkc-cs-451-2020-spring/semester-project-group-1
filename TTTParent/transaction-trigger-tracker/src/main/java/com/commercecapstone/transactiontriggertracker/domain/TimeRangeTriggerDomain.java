@@ -9,6 +9,5 @@ import lombok.Builder;
 public class TimeRangeTriggerDomain {
 	private int triggerID;
 	private int userID;
-	private String timeRangeRule;
-	private String description;
+	private String rule;
 }
