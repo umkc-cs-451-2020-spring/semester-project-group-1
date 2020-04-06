@@ -21,7 +21,7 @@ public class NotificationRowMapper implements RowMapper<NotificationDomain> {
                                 .notificationID(rs.getInt("Notification_ID"))
                                 .transactionID(rs.getInt("Transaction_ID"))
                                 .notificationType(rs.getString("Notification_Type"))
-                                .notificationDescription(rs.getString("Notification_description"))
+                                .triggerID(rs.getInt("Trigger_ID"))
                                 .build();
     }
 }

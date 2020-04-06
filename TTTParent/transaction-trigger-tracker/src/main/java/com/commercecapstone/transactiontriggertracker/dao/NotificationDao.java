@@ -49,9 +49,9 @@ public class NotificationDao extends BaseDao{
     
     public ResponseEntity<Object> addNotification(Map<String, Object> inputParams){
 
-        String typeQuery = "INSERT INTO Notification(Notification_ID, Transaction_ID, Notification_type, Notification_descripton) " +
-                "VALUES (:inputNotification_ID, :inputTransaction_ID, :inputNotification_type, :inputNotification_descripton) " + 
-                "ON DUPLICATE KEY UPDATE Notification_ID = :inputNotification_ID, Transaction_ID = :inputTransaction_ID, Notification_type = :inputNotification_type, Notification_descripton = :inputNotification_descripton; " ;
+        String typeQuery = "INSERT INTO Notification(Notification_ID, Transaction_ID, Notification_type, Trigger_ID) " +
+                "VALUES (:inputNotification_ID, :inputTransaction_ID, :inputNotification_type, :inputTrigger_ID) " + 
+                "ON DUPLICATE KEY UPDATE Notification_ID = :inputNotification_ID, Transaction_ID = :inputTransaction_ID, Notification_type = :inputNotification_type, Trigger_ID = :inputTrigger_ID; " ;
         try {
             get().update(typeQuery, inputParams);
             log.info("Notification ID: {} successfully added", inputParams.get("inputNotification_ID"));

@@ -19,6 +19,6 @@ public class NotificationDomain {
 	private int notificationID;
 	private int transactionID;
 	private String notificationType;
-	private String notificationDescription;
+	private int triggerID;
 	
 }
