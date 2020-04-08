@@ -191,7 +191,7 @@ public class TransactionDao extends BaseDao{
      */
     public ResponseEntity<Object> deleteTransaction(int transactionID, int accountID) {
         
-        String typeQuery = "delete from Transaction where Transaction_ID = :inTransaction_ID and Account_ID = :inAccountID";
+        String typeQuery = "delete from Transaction where Transaction_ID = :inTransaction_ID and Account_ID = :inAccountID;";
         
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("inTransaction_ID", transactionID);
