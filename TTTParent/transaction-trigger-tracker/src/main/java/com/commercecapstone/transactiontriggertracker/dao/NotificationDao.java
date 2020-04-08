@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
 import com.commercecapstone.transactiontriggertracker.domain.NotificationDomain;
+import com.commercecapstone.transactiontriggertracker.domain.TransactionDomain;
 import com.commercecapstone.transactiontriggertracker.service.NotificationRowMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -46,15 +47,49 @@ public class NotificationDao extends BaseDao{
             
     }
     //get and update methods were not implemented for notifications
-    
-    public ResponseEntity<Object> addNotification(Map<String, Object> inputParams){
-
-        String typeQuery = "INSERT INTO Notification(Notification_ID, Transaction_ID, Notification_type, Trigger_ID) " +
-                "VALUES (:inputNotification_ID, :inputTransaction_ID, :inputNotification_type, :inputTrigger_ID) " + 
-                "ON DUPLICATE KEY UPDATE Notification_ID = :inputNotification_ID, Transaction_ID = :inputTransaction_ID, Notification_type = :inputNotification_type, Trigger_ID = :inputTrigger_ID; " ;
+    public List<NotificationDomain> getAccountNotifications(int inputAccountID) {
+    	List<NotificationDomain> accountNotifications = null;
+        
+        String typeQuery = "select * from Notification where Account_ID = :inAccount_ID";
+        HashMap<String,Object> params = new HashMap<String,Object>();
+        params.put("inAccount_ID", inputAccountID);
+        
         try {
-            get().update(typeQuery, inputParams);
-            log.info("Notification ID: {} successfully added", inputParams.get("inputNotification_ID"));
+        	accountNotifications = get().query(typeQuery, params, notificationMapper);
+            log.info("Notifications for AccountID: {} successfully retrieved", inputAccountID);
+        }
+        catch(NullPointerException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        catch(DataAccessException e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        catch(Exception e) {
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return accountNotifications;
+        
+    }
+    
+    public ResponseEntity<Object> addNotification(NotificationDomain inputNotification){
+
+        String typeQuery = "INSERT INTO Notification(Notification_type, Trigger_ID, Transaction_ID, Account_ID) " +
+                "VALUES (:inNotification_type, :inTrigger_ID, :inTransaction_ID, :inAccount_ID) " + 
+                "ON DUPLICATE KEY UPDATE Notification_type = :inNotification_type, Trigger_ID = :inTrigger_ID, Transaction_ID = :inTransaction_ID, Account_ID = :inAccount_ID; " ;
+        Map<String, Object> inputNotificationParams = new HashMap<String, Object>();
+        inputNotificationParams.put("inNotification_type", inputNotification.getNotificationType());
+        inputNotificationParams.put("inTrigger_ID", inputNotification.getTriggerID());
+        inputNotificationParams.put("inTransaction_ID", inputNotification.getTransactionID());
+        inputNotificationParams.put("inAccount_ID", inputNotification.getAccountID());
+        
+        
+        try {
+            get().update(typeQuery, inputNotificationParams);
+            log.info("Notification ID: {} successfully added to the Account ID: {}", inputNotificationParams.get("inNotification_ID"), inputNotificationParams.get("inAccount_ID"));
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         }  catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -79,17 +114,18 @@ public class NotificationDao extends BaseDao{
      * @param int notificationId
      * @return  ResponseEntity
      */
-    public ResponseEntity<Object> deleteNotification(int notificationID) {
+    public ResponseEntity<Object> deleteNotification(int notificationID, int accountID) {
         
-        String delNotification = "delete from Notification where Notification_ID = :inputNotification_ID";
+        String typeQuery = "delete from Notification where Notification_ID = :inNotification_ID and Account_ID = :inAccount_ID;";
         
         Map<String, Object> params = new HashMap<String,Object>();
-        params.put("inputNotification_ID", notificationID);
+        params.put("inNotification_ID", notificationID);
+        params.put("inAccount_ID", accountID);
         
         
         try {
-            get().update(delNotification, params);
-            log.info("Deleted Notification ID: {} ", notificationID);
+            get().update(typeQuery, params);
+            log.info("Deleted Notification ID: {} for Account ID: {}", notificationID, accountID);
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         } catch(NullPointerException e) {
             log.error(e.getMessage());

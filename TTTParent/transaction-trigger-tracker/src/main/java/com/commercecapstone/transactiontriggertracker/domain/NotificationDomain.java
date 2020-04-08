@@ -17,8 +17,9 @@ import lombok.Builder;
 @Data @AllArgsConstructor @Builder
 public class NotificationDomain {
 	private int notificationID;
-	private int transactionID;
 	private String notificationType;
 	private int triggerID;
+	private int transactionID;
+	private int accountID;
 	
 }

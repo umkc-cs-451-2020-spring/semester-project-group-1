@@ -19,9 +19,10 @@ public class NotificationRowMapper implements RowMapper<NotificationDomain> {
     public NotificationDomain mapRow(ResultSet rs, int rowNum) throws SQLException{
         return NotificationDomain.builder()
                                 .notificationID(rs.getInt("Notification_ID"))
-                                .transactionID(rs.getInt("Transaction_ID"))
                                 .notificationType(rs.getString("Notification_Type"))
                                 .triggerID(rs.getInt("Trigger_ID"))
+                                .transactionID(rs.getInt("Transaction_ID"))
+                                .accountID(rs.getInt("Account_ID"))
                                 .build();
     }
 }
