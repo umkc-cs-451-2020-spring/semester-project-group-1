@@ -12,12 +12,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { TriggerpageComponent } from './triggerpage/triggerpage.component';
+import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    TriggerpageComponent,
+    ViewNotificationsComponent
   ],
   imports: [
     BrowserModule,
