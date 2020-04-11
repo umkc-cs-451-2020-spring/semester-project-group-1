@@ -11,7 +11,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import { TriggerpageComponent } from './triggerpage/triggerpage.component';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 
@@ -32,9 +31,9 @@ import { ViewNotificationsComponent } from './view-notifications/view-notificati
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
-    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

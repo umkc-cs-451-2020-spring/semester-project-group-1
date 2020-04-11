@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,3 +11,4 @@ import {FormControl, Validators} from '@angular/forms';
 export class AppComponent {
   title = 'TTT-Frontend';
 }
+

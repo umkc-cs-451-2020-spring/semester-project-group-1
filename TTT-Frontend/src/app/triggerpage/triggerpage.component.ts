@@ -11,5 +11,6 @@ export class TriggerpageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
 }
