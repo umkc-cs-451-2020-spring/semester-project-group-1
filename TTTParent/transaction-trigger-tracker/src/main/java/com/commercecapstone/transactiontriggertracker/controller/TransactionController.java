@@ -1,8 +1,7 @@
 package com.commercecapstone.transactiontriggertracker.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 
 import javax.validation.Valid;
 
@@ -35,38 +34,34 @@ public class TransactionController {
 		return transactionDAO.getAllTransactions();
 	}
 	
-	// Get specific transaction based on transaction ID
-	@GetMapping("/{transactionID}")
-	public TransactionDomain getTransaction(@PathVariable int transactionID) {
-		return transactionDAO.getTransaction(transactionID);
+	// Get all Account transaction based on Account ID
+	@GetMapping("/{inputAccountID}")
+	public List<TransactionDomain> getAccountTransaction(@PathVariable int inputAccountID) {
+		return transactionDAO.getAccountTransactions(inputAccountID);
+	}
+	
+	// Get specific transaction based on Account ID and Transaction ID
+	@GetMapping("/{inputAccountID}/{inputTransactionID}")
+	public TransactionDomain getTRansaction(@PathVariable int inputAccountID, @PathVariable int inputTransactionID){
+		return transactionDAO.getTransaction(inputAccountID, inputTransactionID);
 	}
 	
 	// Add a Transaction
 	@PostMapping("/all")
-	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain transaction){
-		Map<String, Object> inputParams = new HashMap<String,Object>();
-		inputParams.put("inputTransaction_ID", transaction.getTransactionID());
-		inputParams.put("inputTransaction_type", transaction.getTransactionType());
-		inputParams.put("inputTransaction_time", transaction.getTransactionTime());
-		inputParams.put("inputState", transaction.getState());
-		inputParams.put("inputCategory", transaction.getCategory());
-		inputParams.put("inputTransaction_description", transaction.getTransactionDescription());            
-		inputParams.put("inputAmmount", transaction.getAmount());
-		inputParams.put("inputAccount_ID", transaction.getAccountID());
-		return transactionDAO.addTransaction(inputParams);
+	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain inputTransaction){
+		return transactionDAO.addTransaction(inputTransaction);
 	}
 	
 	// Update a Transaction
 	@PutMapping("/all")
-	public ResponseEntity<Object> updateBuildEntry(TransactionDomain transaction){
-		return transactionDAO.updateBuildEntry(transaction);
+	public ResponseEntity<Object> updateTransaction(TransactionDomain inputTransaction){
+		return transactionDAO.updateTransaction(inputTransaction);
 	}
 	
 	// Delete a Transaction based on transaction ID
-	@DeleteMapping("/{transactionID")
-    public ResponseEntity<Object> deleteTransaction(@PathVariable int transactionID) {
-		return transactionDAO.deleteTransaction(transactionID);
+	@DeleteMapping("/{transactionID}/{accountID")
+    public ResponseEntity<Object> deleteTransaction(@PathVariable int transactionID, @PathVariable int accountID) {
+		return transactionDAO.deleteTransaction(transactionID, accountID);
 	}
 
-	
 }
