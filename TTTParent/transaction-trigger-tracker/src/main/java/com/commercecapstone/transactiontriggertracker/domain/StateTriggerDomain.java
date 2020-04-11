@@ -1,5 +1,7 @@
 package com.commercecapstone.transactiontriggertracker.domain;
 
+public class StateTriggerDomain {
+	
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
