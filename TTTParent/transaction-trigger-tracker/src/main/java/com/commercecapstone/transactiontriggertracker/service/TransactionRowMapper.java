@@ -25,13 +25,13 @@ public class TransactionRowMapper  implements RowMapper<TransactionDomain> {
                                 .state(rs.getString("State"))
                                 .category(rs.getString("Category"))
                                 .transactionDescription(rs.getString("Transaction_description"))
-                                .amount(rs.getInt("Ammount"))
-                                .accountID(rs.getInt("Acount_ID"))
+                                .amount(rs.getInt("Amount"))
+                                .accountID(rs.getInt("Account_ID"))
                                 .build();
     }
 	public String asString(Timestamp timestamp) {
         if(timestamp == null) return "";	
-        DateFormat format = new SimpleDateFormat("MM-dd-yyyy,HH:mm");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(timestamp);
     }	
 }

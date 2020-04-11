@@ -21,12 +21,12 @@ create or replace TABLE transaction(
 	Transaction_ID int PRIMARY KEY,
     Transaction_type varchar(255),
     Transaction_time datetime,
-    State varchar(2),
+    State varchar(30),
     Category varchar(45),
     Transaction_description text,
-    Ammount float,
-    Account_ID int,
-    CONSTRAINT FOREIGN KEY ACCOUNT_ID (Account_ID) REFERENCES account(Account_ID)
+    Amount float,
+    Account_ID int#,
+    ##CONSTRAINT FOREIGN KEY ACCOUNT_ID (Account_ID) REFERENCES account(Account_ID)
 )engine = InnoDB;
 
 create or replace TABLE notification(

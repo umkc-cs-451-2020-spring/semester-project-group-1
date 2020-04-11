@@ -45,7 +45,7 @@ public class TransactionDao extends BaseDao{
         return transactionList;
             
     }
-    /** Gets a specific Transaction
+    /** Gets all of one account's transactions.
      * 
      * @param int transactionId
      * @param int accountId
@@ -78,7 +78,13 @@ public class TransactionDao extends BaseDao{
         return accountTransactions;
         
     }
-
+    
+	/*
+	 * Probably don't need to grab a single transaction any where in the app, leaving in just in case
+	 * Get specific transaction based on transaction ID
+	 */
+    
+    /*
     public TransactionDomain getTransaction(int inputAccountID, int inputTransactionID) {
     	List<TransactionDomain> transactionWrapper = null;
         
@@ -108,19 +114,20 @@ public class TransactionDao extends BaseDao{
         return transactionWrapper.get(0);
         
     }
+    */
     
     public ResponseEntity<Object> addTransaction(TransactionDomain inputTransaction){
 
-        String typeQuery = "INSERT INTO Transaction(Transaction_type, Transaction_time, State, Category, Transaction_description, Ammount, Account_ID) " +
-                "VALUES (:inTransaction_type, :inTransaction_time, :inState, :inCategory, :inTransaction_description, :inAmmount, :inAccount_ID) " + 
-                "ON DUPLICATE KEY UPDATE Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Ammount = :inAmmount, Account_ID = :inAccount_ID; " ;
+        String typeQuery = "INSERT INTO Transaction(Transaction_type, Transaction_time, State, Category, Transaction_description, Ammunt, Account_ID) " +
+                "VALUES (:inTransaction_type, :inTransaction_time, :inState, :inCategory, :inTransaction_description, :inAmount, :inAccount_ID) " + 
+                "ON DUPLICATE KEY UPDATE Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Amount = :inAmount, Account_ID = :inAccount_ID; " ;
         Map<String, Object> inputTransactionParams = new HashMap<String, Object>();
         inputTransactionParams.put("inTransaction_type", inputTransaction.getTransactionType());
         inputTransactionParams.put("inTransaction_time", inputTransaction.getTransactionTime());
         inputTransactionParams.put("inState", inputTransaction.getState());
         inputTransactionParams.put("inCategory", inputTransaction.getCategory());
         inputTransactionParams.put("inTransaction_description", inputTransaction.getTransactionDescription());
-        inputTransactionParams.put("inAmmount", inputTransaction.getAmount());
+        inputTransactionParams.put("inAmount", inputTransaction.getAmount());
         inputTransactionParams.put("inAccount_ID", inputTransaction.getAccountID());
         
         
@@ -149,8 +156,8 @@ public class TransactionDao extends BaseDao{
     
     public ResponseEntity<Object> updateTransaction(TransactionDomain inputTransaction) {
 
-        String typeQuery = "update Transaction set Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Ammount = :inAmmount "
-                + "WHERE TransactionID = :inTransactionID, Account_ID = :inAccount_ID;";
+        String typeQuery = "update Transaction set Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Amount = :inAmount "
+                + "WHERE Transaction_ID = :inTransaction_ID AND Account_ID = :inAccount_ID;";
         
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("inTransaction_ID", inputTransaction.getTransactionID());
@@ -159,7 +166,7 @@ public class TransactionDao extends BaseDao{
         params.put("inState", inputTransaction.getState());
         params.put("inCategory", inputTransaction.getCategory());
         params.put("inTransaction_description", inputTransaction.getTransactionDescription());            
-        params.put("inAmmount", inputTransaction.getAmount());
+        params.put("inAmount", inputTransaction.getAmount());
         params.put("inAccount_ID", inputTransaction.getAccountID());
     try {
             get().update(typeQuery, params);
@@ -191,7 +198,7 @@ public class TransactionDao extends BaseDao{
      */
     public ResponseEntity<Object> deleteTransaction(int transactionID, int accountID) {
         
-        String typeQuery = "delete from Transaction where Transaction_ID = :inTransaction_ID and Account_ID = :inAccountID;";
+        String typeQuery = "delete from Transaction where Transaction_ID = :inTransaction_ID and Account_ID = :inAccount_ID;";
         
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("inTransaction_ID", transactionID);
