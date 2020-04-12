@@ -30,6 +30,7 @@ public class TransactionController {
 	private TransactionDao transactionDAO;
 	
 	// Get all transaction
+	// Really just for testing purposes
 	@GetMapping("/all")
 	public List<TransactionDomain> getAllTransactions() {
 		return transactionDAO.getAllTransactions();
