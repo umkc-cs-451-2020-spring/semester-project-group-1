@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TriggerpageComponent } from './triggerpage.component';
+import { ViewTransactionsComponent } from './view-transactions.component';
 
-describe('TriggerpageComponent', () => {
-  let component: TriggerpageComponent;
-  let fixture: ComponentFixture<TriggerpageComponent>;
+describe('ViewTransactionsComponent', () => {
+  let component: ViewTransactionsComponent;
+  let fixture: ComponentFixture<ViewTransactionsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TriggerpageComponent ]
+      declarations: [ ViewTransactionsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TriggerpageComponent);
+    fixture = TestBed.createComponent(ViewTransactionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

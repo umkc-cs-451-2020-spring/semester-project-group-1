@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewNotificationsComponent } from './view-notifications.component';
+import { ViewTriggersComponent } from './view-triggers.component';
 
-describe('ViewNotificationsComponent', () => {
-  let component: ViewNotificationsComponent;
-  let fixture: ComponentFixture<ViewNotificationsComponent>;
+describe('ViewTriggersComponent', () => {
+  let component: ViewTriggersComponent;
+  let fixture: ComponentFixture<ViewTriggersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewNotificationsComponent ]
+      declarations: [ ViewTriggersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewNotificationsComponent);
+    fixture = TestBed.createComponent(ViewTriggersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

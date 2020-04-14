@@ -11,17 +11,21 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { TriggerpageComponent } from './triggerpage/triggerpage.component';
+import { TriggerpageComponent } from './view-triggers/triggerpage.component';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
+import { EditTriggersComponent } from './edit-triggers/edit-triggers.component';
+import { ViewTransactionsComponent } from './view-transactions/view-transactions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
     UserDashboardComponent,
-    TriggerpageComponent,
-    ViewNotificationsComponent
+    ViewTriggersComponent,
+    EditTriggersComponent,
+    ViewTransactionsComponent,
   ],
   imports: [
     BrowserModule,
