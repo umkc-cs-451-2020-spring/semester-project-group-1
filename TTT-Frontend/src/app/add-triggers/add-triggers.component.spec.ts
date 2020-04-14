@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewTriggersComponent } from './view-triggers.component';
+import { AddTriggersComponent } from './add-triggers.component';
 
-describe('ViewTriggersComponent', () => {
-  let component: ViewTriggersComponent;
-  let fixture: ComponentFixture<ViewTriggersComponent>;
+describe('AddTriggersComponent', () => {
+  let component: AddTriggersComponent;
+  let fixture: ComponentFixture<AddTriggersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewTriggersComponent ]
+      declarations: [ AddTriggersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewTriggersComponent);
+    fixture = TestBed.createComponent(AddTriggersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

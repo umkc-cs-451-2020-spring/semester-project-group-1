@@ -9,24 +9,23 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+// import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
-import { TriggerpageComponent } from './view-triggers/triggerpage.component';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
 import { EditTriggersComponent } from './edit-triggers/edit-triggers.component';
 import { ViewTransactionsComponent } from './view-transactions/view-transactions.component';
+import { AddTriggersComponent } from './add-triggers/add-triggers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
     UserDashboardComponent,
-    ViewTriggersComponent,
     EditTriggersComponent,
     ViewTransactionsComponent,
     ViewNotificationsComponent,
+    AddTriggersComponent,
   ],
   imports: [
     BrowserModule,
