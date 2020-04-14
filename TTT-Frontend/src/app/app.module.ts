@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { TriggerpageComponent } from './triggerpage/triggerpage.component';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ViewNotificationsComponent } from './view-notifications/view-notificati
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

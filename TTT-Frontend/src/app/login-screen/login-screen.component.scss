@@ -1,70 +1,70 @@
-.container {
-    display: flex;
-    justify-content: center;
-    color: #306237;
-    font-size: 300%; 
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+.login-box{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5.5%;
+    max-width: 500px;
+    vertical-align: center;
+    background-color: whitesmoke;
+}
+
+.login-button{
+    margin: auto;
+    margin-top: 5%;
     text-align: center;
-    background-color: lightgray;
-    padding: 20px;
+    background-color: #306237;
+    color: white;
 }
 
-.container2 {
-    display: flex;
-    justify-content: center;
-    background-color: lightgray;
-}
-
-.container3{
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    background-color: lightgray;
-}
-
-
-img {
-    width: 65%;
-}
-
-h2 {
+.login-header{
+    margin: auto;
+    margin-bottom: 0%;
     text-align: center;
-    color: #393F3A;
-    padding: 5px;
-    background-color: lightgray;
-    font-size: 100%;
-}
-
-.mat-card {
-    background-color: lightgray;
-    text-align: center;
-}
-
-loginForm{
-    display: flex;
-    flex-direction: column;
-}
-
-
-.prompts{
     color: #393F3A;
     font-size: 20px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.links{
-    color: #393F3A;
-    font-size: 12px;
+.login-form{
+    display: flex;
+    flex-direction: column;
 }
 
-.login-content{
-    background-color: lightgray;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    font-family: Arial, Helvetica, sans-serif;
+.ErrorMessage{
+    color:red;
     text-align: center;
-  }
+}
 
+img {
+    display: block;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.toolbar {
+    background-color: #306237;
+    height: 10%;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 3vw;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #393F3A;
+}
+
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.forgot-password {
+    font-size: 10px;
+    color:#393F3A;
+    text-align: center;
+}
+
+.mat-form-field-infix{
+    padding: 0px;
+}
