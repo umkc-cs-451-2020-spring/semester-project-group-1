@@ -26,6 +26,7 @@ import { ViewTransactionsComponent } from './view-transactions/view-transactions
     ViewTriggersComponent,
     EditTriggersComponent,
     ViewTransactionsComponent,
+    ViewNotificationsComponent,
   ],
   imports: [
     BrowserModule,
