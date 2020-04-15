@@ -18,7 +18,8 @@ import { ViewTransactionsComponent } from './view-transactions/view-transactions
 import { AddTriggersComponent } from './add-triggers/add-triggers.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

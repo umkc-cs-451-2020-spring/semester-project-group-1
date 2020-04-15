@@ -2,7 +2,7 @@
     <div>
       <mat-vertical-stepper linear #stepper>
 
-  
+
         <mat-step>
           <ng-template matStepLabel>Add New Application Scan</ng-template>
           <div>
@@ -12,7 +12,7 @@
             </div>
           </div>
         </mat-step>
-  
+
         <mat-step>
           <ng-template matStepLabel>Choose Option</ng-template>
           <div class="promoted-row" *ngIf="addTrigger === true">
@@ -27,7 +27,7 @@
             <mat-spinner *ngIf="addTriggerAdding1 === true" [diameter]="30"></mat-spinner>
           </div>
       </mat-step>
-   
+
       <mat-step>
         <div class="promoted-row" *ngIf="addTrigger === true">
           <button mat-raised-button color="primary" (click)="Cost = true"  [disabled]="Timeframe" [disabled]="Location">New Cost Trigger</button>
@@ -38,6 +38,7 @@
 
 <!-- LOCATION TRIGGER ----------------------------------------------------------------------------------------------->
 
+<!--
 <mat-step>
   <div class="promoted-row" *ngIf="Location === true" [value]="state">
   <mat-form-field>
@@ -49,14 +50,14 @@
       <mat-option value="Ohio">Ohio</mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <p>You selected: {{selected}}</p>
 
   <button mat-raised-button color="primary" (click)="DONE = true">OKAY</button>
 
 </div>
 </mat-step>
-
+-->
 <!-- /LOCATION TRIGGER END -->
 
 <!-- TIMEFRAME TRIGGER ----------------------------------------------------------------------------------------------->
@@ -71,11 +72,10 @@
 
 
 <!-- /TIMEFRAME TRIGGER END -->
-  
+
       </mat-vertical-stepper>
     </div>
-  
-  
-  
+
+
+
   </div>
-  
