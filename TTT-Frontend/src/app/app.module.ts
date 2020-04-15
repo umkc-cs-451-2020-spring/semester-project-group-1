@@ -16,6 +16,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { EditTriggersComponent } from './edit-triggers/edit-triggers.component';
 import { ViewTransactionsComponent } from './view-transactions/view-transactions.component';
 import { AddTriggersComponent } from './add-triggers/add-triggers.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { AddTriggersComponent } from './add-triggers/add-triggers.component';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
