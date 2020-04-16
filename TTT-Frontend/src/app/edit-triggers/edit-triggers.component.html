@@ -1,1 +1,53 @@
-<p>edit-triggers works!</p>
+<div class="main mat-typography">
+    <h2 class="edit-header">Edit App: {{ entryToEdit.appName }}</h2>
+  
+    <div class="id-info">
+      <h3 class="subheading-1">App ID:</h3> <p>{{entryAppID}}</p>
+      <h3 class="subheading-1">Build ID:</h3> <p>{{entryBuildID}}</p>
+      <h3 class="subheading-1">Sandbox ID:</h3> <p>{{entrySandboxID}}</p>
+      <h3 class="subheading-1">Sandbox Name: </h3> <p>{{entrySandboxName}}</p>
+    </div>
+    <div class="input-row">
+        <mat-form-field>
+          <mat-label> Jira Project:</mat-label>
+            <input matInput placeholder="Project Name/Key" [formControl]="projectNameInput">
+        </mat-form-field>
+    </div>
+  
+    <div class="input-row">
+        <mat-form-field>
+          <mat-label> Primary Language:</mat-label>
+            <input matInput placeholder="Ex: Python" [formControl]="primaryLanguageInput">
+        </mat-form-field>
+    </div>
+  
+    <!-- <div class="input-row">
+        <mat-form-field>
+          <mat-label> Email List:</mat-label>
+            <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="25"
+            [formControl]="emailListInput"></textarea>
+        </mat-form-field>
+    </div>
+  
+    <div class="input-row">
+        <mat-checkbox [formControl]="activeStatusInput">
+          Active Schedule
+        </mat-checkbox>
+    </div>
+  
+    <div class="input-row">
+      <mat-form-field>
+        <mat-label>Modified By:</mat-label>
+        <input matInput placeholder="DT#" [formControl]="lastModifiedByInput" required minlength="7" maxlength="8" (keyup.enter)="updateAppEntry()">
+      </mat-form-field>
+    </div>-->
+  
+    <div class="input-row">
+      <button mat-raised-button color="primary" (click)="updateAppEntry()" type="submit" [disabled]="!enteredValue()">Submit Changes</button>
+    </div>
+  
+  </div>
