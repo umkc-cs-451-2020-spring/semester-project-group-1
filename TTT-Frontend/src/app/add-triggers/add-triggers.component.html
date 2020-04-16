@@ -1,81 +1,72 @@
 <div class="main mat-typography">
-    <div>
-      <mat-vertical-stepper linear #stepper>
-
-  
-        <mat-step>
-          <ng-template matStepLabel>Add New Application Scan</ng-template>
-          <div>
-            <h3>Add a new trigger</h3>
-            <div class="button-row">
-              <button mat-raised-button color="primary" (click)= "addTrigger = true" [disabled] = "addTrigger" matStepperNext>Add Trigger</button>
-            </div>
-          </div>
-        </mat-step>
-  
-        <mat-step>
-          <ng-template matStepLabel>Choose Option</ng-template>
-          <div class="promoted-row" *ngIf="addTrigger === true">
-            <button mat-raised-button color="primary" (click)="Location = true"  [disabled]="Timeframe" [disabled]="Cost">New Location Trigger</button>
-            <mat-spinner *ngIf="addTriggerAdding1 === true" [diameter]="30"></mat-spinner>
-          </div>
-     </mat-step>
-
+  <div>
+    <mat-vertical-stepper linear #stepper>
       <mat-step>
-          <div class="promoted-row" *ngIf="addTrigger === true">
-            <button mat-raised-button color="primary" (click)="Timeframe = true" [disabled]="Location" [disabled]="Cost">New Timeframe Trigger</button>
-            <mat-spinner *ngIf="addTriggerAdding1 === true" [diameter]="30"></mat-spinner>
+        <ng-template matStepLabel>Select a trigger</ng-template>
+        <div>
+          <h3>Select a trigger type</h3>
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)="Location = true" [disabled]="Timeframe" [disabled]="Cost"
+              matStepperNext>New Location Trigger</button>
+            <button mat-raised-button color="primary" (click)="Timeframe = true" [disabled]="Location" [disabled]="Cost"
+              matStepperNext>New Timeframe Trigger</button>
+            <button mat-raised-button color="primary" (click)="Cost = true" [disabled]="Timeframe" [disabled]="Location"
+              matStepperNext>New Cost Trigger</button>
           </div>
-      </mat-step>
-   
-      <mat-step>
-        <div class="promoted-row" *ngIf="addTrigger === true">
-          <button mat-raised-button color="primary" (click)="Cost = true"  [disabled]="Timeframe" [disabled]="Location">New Cost Trigger</button>
-          <mat-spinner *ngIf="addTriggerAdding1 === true" [diameter]="30"></mat-spinner>
         </div>
-    </mat-step>
+      </mat-step>
 
+      <mat-step>
+        <ng-template matStepLabel>Customize New Trigger</ng-template>
+        <div>
+          <div class="promoted-row" *ngIf="Location === true" [value]="state">
+            <mat-form-field>
+              <mat-label (click)="SELECT = true">Select a state</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option>None</mat-option>
+                <mat-option value="Kansas">Kansas</mat-option>
+                <mat-option value="Missouri">Missouri</mat-option>
+                <mat-option value="Ohio">Ohio</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p>You selected: {{selected}}</p>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
 
-<!-- LOCATION TRIGGER ----------------------------------------------------------------------------------------------->
+          <div class="promoted-row" *ngIf="Timeframe === true" [value]="starttime">
+            <mat-form-field>
+              <mat-label (click)="SELECT = true">Select a start time</mat-label>
+              <mat-select [(value)]="starttime">
+                <mat-option>None</mat-option>
+                <mat-option value="00:00">00:00</mat-option>
+                <mat-option value="01:00">01:00</mat-option>
+                <mat-option value="02:00">02:00</mat-option>
+              </mat-select>
+            </mat-form-field>
 
-<mat-step>
-  <div class="promoted-row" *ngIf="Location === true" [value]="state">
-  <mat-form-field>
-    <mat-label (click)="SELECT = true" >Select an option</mat-label>
-    <mat-select [(value)]="selected">
-      <mat-option>None</mat-option>
-      <mat-option value="Kansas">Kansas</mat-option>
-      <mat-option value="Missouri">Missouri</mat-option>
-      <mat-option value="Ohio">Ohio</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-  <p>You selected: {{selected}}</p>
+            <div class="promoted-row" *ngIf="Timeframe === true" [value]="endtime">
+              <mat-form-field>
+                <mat-label (click)="SELECT = true">Select an end time</mat-label>
+                <mat-select [(value)]="endtime">
+                  <mat-option>None</mat-option>
+                  <mat-option value="00:00">00:00</mat-option>
+                  <mat-option value="01:00">01:00</mat-option>
+                  <mat-option value="02:00">02:00</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <p>Purchase notifications will be sent from {{starttime}} to {{endtime}}</p>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
 
-  <button mat-raised-button color="primary" (click)="DONE = true">OKAY</button>
-
-</div>
-</mat-step>
-
-<!-- /LOCATION TRIGGER END -->
-
-<!-- TIMEFRAME TRIGGER ----------------------------------------------------------------------------------------------->
-
-
-
-
-
-
-
-
-
-
-<!-- /TIMEFRAME TRIGGER END -->
-  
-      </mat-vertical-stepper>
-    </div>
-  
-  
-  
+          <div class="promoted-row" *ngIf="Cost === true" [value]="cost">
+            <mat-label (click)="SELECT = true">Select a maximum unsupervised expenditure</mat-label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10" min="1" max="500">
+            </mat-slider>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
   </div>
-  
+</div>

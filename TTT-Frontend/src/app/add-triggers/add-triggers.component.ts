@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-triggers.component.scss']
 })
 export class AddTriggersComponent implements OnInit {
-
+ 
   constructor() { }
 
   ngOnInit(): void {
