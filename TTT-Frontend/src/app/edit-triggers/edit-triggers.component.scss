@@ -13,10 +13,10 @@
 .main{
     display: grid;
   
-    /*align-content: center;
+    align-content: center;
     align-items: center;
     justify-content: center;
-    justify-items: center;*/
+    justify-items: center;
     grid-template-columns: 1fr;
     grid-gap: 0.5em;
   }
@@ -39,4 +39,8 @@
     display: grid;
     align-content: center;
     justify-content: center;
+  }
+
+  .mat-select-value {
+    background-color: red;
   }
