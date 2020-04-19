@@ -20,6 +20,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
 
 
 
@@ -32,6 +33,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ViewTransactionsComponent,
     ViewNotificationsComponent,
     AddTriggersComponent,
+    ViewTriggersComponent,
   ],
   imports: [
     BrowserModule,
