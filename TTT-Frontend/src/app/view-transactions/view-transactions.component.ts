@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface PeriodicElement {
+export interface Transactions {
   transactionID: number;
   transactionTime: string;
   transactionType: string;
@@ -11,7 +11,7 @@ export interface PeriodicElement {
   accountID: number;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+const TRANSACTION_DATA: Transactions[] = [
   {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
   {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
   {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
@@ -34,7 +34,7 @@ export class ViewTransactionsComponent implements OnInit {
   constructor() { }
 
     displayedColumns: string[] = ['accountID', 'transactionTime', 'transactionType', 'amount', 'transactionID', 'state', 'category', 'transactionDescription'];
-    dataSource = ELEMENT_DATA;
+    dataSource = TRANSACTION_DATA;
 
   ngOnInit(): void {
   }
