@@ -13,3 +13,4 @@ export class EditTriggersComponent implements OnInit {
   }
 
 }
+

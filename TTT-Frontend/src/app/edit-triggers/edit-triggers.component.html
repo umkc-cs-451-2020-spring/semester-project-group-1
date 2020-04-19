@@ -9,9 +9,9 @@
     <h3 class="subheading-1">Current Settings:</h3>
     <p>{{entrySandboxID}}</p>
   </div>
-  <!------------------------------------------------------------------ EDIT STATE TRIGGER -------------------------------------------------------------------- -->
+  <!------------------------------------------------------------------ EDIT LOCATION TRIGGER -------------------------------------------------------------------- -->
 
-  <div>
+  <!-- <div>
     <div class="promoted-row" [value]="state">
       <mat-form-field>
         <mat-label (click)="SELECT = true">Select a state</mat-label>
@@ -23,27 +23,59 @@
         </mat-select>
       </mat-form-field>
       <p>You selected: {{selected}}</p>
-      <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+      <button mat-raised-button color="primary">SUBMIT</button>
+    </div> -->
+
+
+    <!------------------------------------------------------------------ EDIT TIMEFRAME TRIGGER -------------------------------------------------------------------- -->
+
+
+    <!-- <div class="promoted-row" [value]="starttime">
+      <mat-form-field>
+        <mat-label (click)="SELECT = true">Select a start time</mat-label>
+        <mat-select [(value)]="starttime">
+          <mat-option>None</mat-option>
+          <mat-option value="00:00">00:00</mat-option>
+          <mat-option value="01:00">01:00</mat-option>
+          <mat-option value="02:00">02:00</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="promoted-row" [value]="endtime">
+        <mat-form-field>
+          <mat-label (click)="SELECT = true">Select an end time</mat-label>
+          <mat-select [(value)]="endtime">
+            <mat-option>None</mat-option>
+            <mat-option value="00:00">00:00</mat-option>
+            <mat-option value="01:00">01:00</mat-option>
+            <mat-option value="02:00">02:00</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <p>Purchase notifications will be sent from {{starttime}} to {{endtime}}</p>
+      <button mat-raised-button color="primary">SUBMIT</button>
+    </div> -->
+
+     <!------------------------------------------------------------------ EDIT COST TRIGGER -------------------------------------------------------------------- -->
+
+     <div class="promoted-row"[value]="cost">
+      <mat-label (click)="SELECT = true">Select a maximum unsupervised expenditure</mat-label>
+      <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10" min="1" max="500">
+      </mat-slider>
+      <button mat-raised-button color="primary" (click)="DONE = true">SUBMIT</button>
     </div>
 
-  <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu> -->
 
-  <!------------------------------------------------------------------ EDIT LOCATION TRIGGER -------------------------------------------------------------------- -->
 
-  <div class="input-row">
-    <mat-form-field>
-      <mat-label> Primary Language:</mat-label>
-      <input matInput placeholder="Ex: Python" [formControl]="primaryLanguageInput">
-    </mat-form-field>
-  </div>
 
-  <div class="input-row">
-    <button mat-raised-button color="primary" (click)="updateAppEntry()" type="submit"
-      [disabled]="!enteredValue()">Submit Changes</button>
-  </div>
 
-</div>
+
+
+
+
+
+
+
+
+
+    </div>
