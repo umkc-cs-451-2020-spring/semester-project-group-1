@@ -1,26 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 export interface Transactions {
-  transactionID: number;
-  transactionTime: string;
-  transactionType: string;
-  state: string;
-  category: string;
-  transactionDescription: string;
-  amount: string;
-  accountID: number;
+  triggerNumber: number;
+  triggerType: string;
+  triggerSetting: string;
+  editTrigger: string;
 }
 
-const TRANSACTION_DATA: Transactions[] = [
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-  {transactionID: 123, state: 'Kansas', category: 'purchase', transactionDescription: "drink", accountID: 1, transactionTime: '13:00', transactionType: 'food', amount: '12.00'},
-   
+const TRIGGER_DATA: Transactions[] = [
+  {triggerNumber: 1, triggerType: 'Cost', triggerSetting: '$100', editTrigger: 'edit'},
+  {triggerNumber: 2, triggerType: 'Location', triggerSetting: 'Kansas', editTrigger: 'edit'},
+  {triggerNumber: 3, triggerType: 'Timeframe', triggerSetting: '00:00-04:00',  editTrigger: 'edit'},
 ];
 
 @Component({
@@ -32,8 +22,8 @@ export class ViewTriggersComponent implements OnInit {
 
   constructor() { }
   
-  displayedColumns: string[] = ['accountID', 'transactionTime', 'transactionType', 'amount', 'transactionID', 'state', 'category', 'transactionDescription'];
-  dataSource = TRANSACTION_DATA;
+  displayedColumns: string[] = ['triggerNumber', 'triggerType', 'triggerSetting', 'editTrigger'];
+  dataSource = TRIGGER_DATA;
 
   ngOnInit(): void {
   }

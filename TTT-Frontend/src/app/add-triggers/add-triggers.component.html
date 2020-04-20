@@ -20,6 +20,7 @@
         <ng-template matStepLabel>Customize New Trigger</ng-template>
         <div>
           <div class="promoted-row" *ngIf="Location === true" [value]="state">
+            <div>Select a state to be notified of transactions in:</div>
             <mat-form-field>
               <mat-label (click)="SELECT = true">Select a state</mat-label>
               <mat-select [(value)]="selected">
@@ -29,13 +30,13 @@
                 <mat-option value="Ohio">Ohio</mat-option>
               </mat-select>
             </mat-form-field>
-            <p>You selected: {{selected}}</p>
             <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
           </div>
 
           <div class="promoted-row" *ngIf="Timeframe === true" [value]="starttime">
+            <div>Select a start time and an end time to be notified of all transactions:</div>
             <mat-form-field>
-              <mat-label (click)="SELECT = true">Select a start time</mat-label>
+              <mat-label (click)="SELECT = true">Start time</mat-label>
               <mat-select [(value)]="starttime">
                 <mat-option>None</mat-option>
                 <mat-option value="00:00">00:00</mat-option>
@@ -55,12 +56,11 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <p>Purchase notifications will be sent from {{starttime}} to {{endtime}}</p>
             <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
           </div>
 
           <div class="promoted-row" *ngIf="Cost === true" [value]="cost">
-            <mat-label (click)="SELECT = true">Select a maximum unsupervised expenditure</mat-label>
+            <mat-label (click)="SELECT = true">Select a maximum unsupervised expenditure: </mat-label>
             <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10" min="1" max="500">
             </mat-slider>
             <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>

@@ -13,11 +13,44 @@
     margin: auto;
     text-align: center;
     background-color: white;
-    color: green;
-    float: left;
+    color: lightgray;
+    float: right;
     margin-left: 20px;
 }
 
 table {
     width: 100%;
+  }
+
+.seeAllTransactions{
+    text-align: center;
+    background-color: #306237;
+    color: white;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.toolbarSpread {
+    text-align: center;
+    background-color: #306237;
+    color: white;
+    float: right;
+    margin-top: 30px;
+    margin-right: 10px;
+}
+
+.icon {
+    padding: 0 14px;
+    padding-top: 55px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .logout {
+      background-color: #306237;
+      padding: 0 14px;
+      padding-top: 55px;
   }
