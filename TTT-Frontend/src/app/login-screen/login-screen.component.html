@@ -20,8 +20,6 @@
               <mat-hint>WSS-Master</mat-hint>
           </mat-form-field>
           <mat-hint class="ErrorMessage" *ngIf="show">{{this.currentError}}</mat-hint>
-          <div class= "forgot-password">Forgot password?</div>
-          <div class= "forgot-password">Need an account?</div>
           <button class="login-button" mat-raised-button [disabled]="!loginForm.valid"
               (click)="loginSubmit()">Login</button>
       </form>

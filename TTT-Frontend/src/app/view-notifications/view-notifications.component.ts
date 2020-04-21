@@ -28,7 +28,7 @@ export class ViewNotificationsComponent implements OnInit {
 
   constructor() { }
 
-  displayedColumns: string[] = ['typeOfNotification', 'date', 'notificationID', 'description'];
+  displayedColumns: string[] = ['notificationID', 'date', 'typeOfNotification', 'description'];
   dataSource = NOTIFICATION_DATA;
 
 
