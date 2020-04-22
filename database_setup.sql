@@ -21,21 +21,22 @@ create or replace TABLE transaction(
 	Transaction_ID int PRIMARY KEY,
     Transaction_type varchar(255),
     Transaction_time datetime,
-    State varchar(2),
+    State varchar(30),
     Category varchar(45),
     Transaction_description text,
-    Ammount float,
+    Amount float,
     Account_ID int,
     CONSTRAINT FOREIGN KEY ACCOUNT_ID (Account_ID) REFERENCES account(Account_ID)
 )engine = InnoDB;
 
 create or replace TABLE notification(
-	Notification_ID int AUTO_INCREMENT,
+	Notification_ID int auto_increment primary KEY,
 	Trigger_ID int NOT null,
 	Notification_type varchar(255),
     Transaction_ID int DEFAULT NULL,
-    CONSTRAINT FOREIGN KEY TRANSACTION_ID (Transaction_ID) REFERENCES transaction(Transaction_ID),
-    constraint primary key notification_pk (Notification_ID, Trigger_ID, Notification_Type)
+ 	Account_ID int NOT NULL,
+    CONSTRAINT FOREIGN KEY fk_Transaction	 (Transaction_ID) REFERENCES transaction(Transaction_ID),
+    CONSTRAINT FOREIGN key fk_Account (Account_ID) references account(Account_ID)
 )engine = InnoDB;
 
 create or replace TABLE state_trigger(

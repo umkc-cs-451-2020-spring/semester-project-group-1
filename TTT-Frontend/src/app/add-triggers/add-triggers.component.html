@@ -1,0 +1,70 @@
+<div class="main mat-typography">
+  <div>
+    <mat-vertical-stepper linear #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Select a trigger</ng-template>
+        <div>
+          <h3>Select a trigger type</h3>
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)="Location = true" [disabled]="Timeframe" [disabled]="Cost"
+              matStepperNext>New Location Trigger</button>
+            <button mat-raised-button color="primary" (click)="Timeframe = true" [disabled]="Location" [disabled]="Cost"
+              matStepperNext>New Timeframe Trigger</button>
+            <button mat-raised-button color="primary" (click)="Cost = true" [disabled]="Timeframe" [disabled]="Location"
+              matStepperNext>New Cost Trigger</button>
+          </div>
+        </div>
+      </mat-step>
+
+      
+      <mat-step>
+        <ng-template matStepLabel>Customize New Trigger</ng-template>
+        <div>
+          <div class="promoted-row" *ngIf="Location === true" [value]="state">
+            <div>Select a state to be notified of transactions in:</div>
+            <mat-form-field>
+              <mat-label (click)="SELECT = true">Select a state</mat-label>
+              <mat-select [(value)]="selected">
+                <mat-option *ngFor="let state of states" [value]="state.value">
+                  {{state.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
+
+          <div class="promoted-row" *ngIf="Timeframe === true" [value]="starttime">
+            <div>Select a start time and an end time to be notified of all transactions:</div>
+            <mat-form-field>
+              <mat-label (click)="SELECT = true">Start time</mat-label>
+              <mat-select [(value)]="starttime">
+                <mat-option *ngFor="let startTime of startTimes" [value]="startTime.value">
+                  {{startTime.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div class="promoted-row" *ngIf="Timeframe === true" [value]="endtime">
+              <mat-form-field>
+                <mat-label (click)="SELECT = true">Select an end time</mat-label>
+                <mat-select [(value)]="endtime">
+                  <mat-option *ngFor="let endTime of endTimes" [value]="endTime.value">
+                    {{endTime.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
+
+          <div class="promoted-row" *ngIf="Cost === true" [value]="cost">
+            <mat-label (click)="SELECT = true">Select a maximum unsupervised expenditure: </mat-label>
+            <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="10" min="1" max="500">
+            </mat-slider>
+            <button mat-raised-button color="primary" (click)="DONE = true" matStepperNext>SUBMIT</button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+</div>

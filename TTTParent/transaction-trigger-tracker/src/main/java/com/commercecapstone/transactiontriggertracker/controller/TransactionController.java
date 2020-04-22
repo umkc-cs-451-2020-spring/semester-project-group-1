@@ -29,39 +29,51 @@ public class TransactionController {
 	private TransactionDao transactionDAO;
 	
 	// Get all transaction
+	// Really just for testing purposes
 	@GetMapping("/all")
 	public List<TransactionDomain> getAllTransactions() {
 		return transactionDAO.getAllTransactions();
 	}
 	
-	// Get all Account transaction based on Account ID
-	@GetMapping("/{inputAccountID}")
-	public List<TransactionDomain> getAccountTransaction(@PathVariable int inputAccountID) {
-		return transactionDAO.getAccountTransactions(inputAccountID);
+	/*
+	 * TODO: Is this best practice? Maybe pass in a response body with account ID instead?
+	 * Returns all transactions for a specific account
+	 */
+	@GetMapping("/account/{accountID}")
+	public List<TransactionDomain> getAccountTransactions(@PathVariable int accountID) {
+		return transactionDAO.getAccountTransactions(accountID);
 	}
 	
-	// Get specific transaction based on Account ID and Transaction ID
-	@GetMapping("/{inputAccountID}/{inputTransactionID}")
-	public TransactionDomain getTRansaction(@PathVariable int inputAccountID, @PathVariable int inputTransactionID){
-		return transactionDAO.getTransaction(inputAccountID, inputTransactionID);
+	/*
+	 * Probably don't need to grab a single transaction any where in the app, leaving in just in case
+	 * Get specific transaction based on transaction ID
+	 */
+	
+	/*
+	@GetMapping("/{transactionID}")
+	public TransactionDomain getTransaction(@PathVariable int transactionID) {
+		return transactionDAO.getTransaction(transactionID);
 	}
+	*/
 	
 	// Add a Transaction
-	@PostMapping("/all")
-	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain inputTransaction){
-		return transactionDAO.addTransaction(inputTransaction);
+	@PostMapping("/add")
+	public ResponseEntity<Object> addTransaction(@RequestBody @Valid @NonNull TransactionDomain transaction){
+		return transactionDAO.addTransaction(transaction);
 	}
 	
 	// Update a Transaction
-	@PutMapping("/all")
-	public ResponseEntity<Object> updateTransaction(TransactionDomain inputTransaction){
-		return transactionDAO.updateTransaction(inputTransaction);
+	@PutMapping("/update")
+	public ResponseEntity<Object> updateTransactionEntry(@RequestBody TransactionDomain transaction){
+		return transactionDAO.updateTransaction(transaction);
 	}
 	
 	// Delete a Transaction based on transaction ID
-	@DeleteMapping("/{transactionID}/{accountID")
+	@DeleteMapping("/delete/{transactionID}/{accountID}")
     public ResponseEntity<Object> deleteTransaction(@PathVariable int transactionID, @PathVariable int accountID) {
 		return transactionDAO.deleteTransaction(transactionID, accountID);
 	}
+	
+	
 
 }

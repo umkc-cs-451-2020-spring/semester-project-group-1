@@ -3,7 +3,7 @@
 # Account_ID (since we only need to test the controller for now).
 
 use banking_database;
-INSERT INTO transaction(Transaction_ID, Transaction_time, Transaction_type, State, Category, Transaction_description, Ammount, Account_ID) values
+INSERT INTO transaction(Transaction_ID, Transaction_time, Transaction_type, State, Category, Transaction_description, Amount, Account_ID) values
 	(99682762, FROM_UNIXTIME(UNIX_TIMESTAMP('2018-01-01 01:01:01') + FLOOR(0 + (RAND() * 63072000))) , 'Withdrawal', 'Missouri', 'Drinks', 
     'Starbucks', 12.00, 43914578),
     
