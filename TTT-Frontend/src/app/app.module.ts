@@ -21,6 +21,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -50,7 +51,8 @@ import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
     MatStepperModule,
     MatSliderModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

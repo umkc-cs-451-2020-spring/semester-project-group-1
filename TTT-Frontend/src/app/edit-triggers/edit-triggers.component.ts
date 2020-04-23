@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
+//import { EditAppService } from './../edit-app.service';
+import { FormControl, Validators, FormGroup, FormBuilder, FormsModule } from '@angular/forms';
+//import { TriggerTableItem } from './../app-table.service';
+import { Component, OnInit, OnChanges, AfterViewInit, NgModule } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, } from '@angular/material/dialog';
+import { Inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+//import { Associate } from '../login/login-response.model';
 
 interface State {
   value: string;
@@ -133,10 +139,69 @@ export class EditTriggersComponent implements OnInit {
     ];
 
     
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<EditTriggersComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TriggerTableItem,
+    public editApp: EditTriggersComponent,
+    public snackBar: MatSnackBar) { }
+
+    session = window.sessionStorage;
+   // user: Associate = JSON.parse(this.session.getItem("user"));
+    entryToEdit = this.data;
+    projectNameInput = new FormControl(this.entryToEdit.jiraProject, [Validators.maxLength(100)]);
+    primaryLanguageInput = new FormControl(this.entryToEdit.primaryLanguage, [Validators.maxLength(100)]);
+    changeDate = false;
+  
+    entryAppID = this.entryToEdit.appID;
+    entryBuildID = this.entryToEdit.buildID;
+    entrySandboxID = this.entryToEdit.sandboxID;
+    entrySandboxName = this.entryToEdit.sandboxName;
+
 
   ngOnInit(): void {
   }
+
+
+  enteredValue() {
+    if (this.primaryLanguageInput.value !== undefined && this.primaryLanguageInput.value !== null && this.primaryLanguageInput.value !== "" && this.primaryLanguageInput.valid) {
+      // console.log(this.primaryLanguageInput.value);
+      return true;
+    }
+    else if (this.projectNameInput.value !== undefined && this.projectNameInput.value !== null && this.projectNameInput.value !== "" && this.projectNameInput.valid) {
+      // console.log(this.projectNameInput.value);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  /**
+   * Updates build metadata with inputted FormControl values
+   */
+  updateAppEntry() {
+    // console.log("Last Static Scan: " + this.entryToEdit.lastStaticScan);
+    this.entryToEdit.jiraProject = this.projectNameInput.value;
+    this.entryToEdit.primaryLanguage = this.primaryLanguageInput.value;
+    this.entryToEdit.lastModifiedBy = this.user.id;
+    this.entryToEdit.lastStaticScan = this.entryToEdit.lastStaticScan;
+    this.entryToEdit.lastDynamicScan = this.entryToEdit.lastDynamicScan;
+    this.snackBar.open('Attempting to edit entry...');
+    this.editApp.editEntry(this.entryToEdit).subscribe(
+      data => {
+        this.snackBar.open('Edit successful!', 'Okay', {
+          duration: 3000
+        });
+      }, (err) => {
+        this.snackBar.open(err, 'Okay', {
+          duration: 3000
+        });
+      }
+    );
+
+
+    this.dialogRef.close();
+  }
+}
 
 }
 
