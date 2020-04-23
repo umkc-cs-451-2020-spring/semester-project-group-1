@@ -1,9 +1,9 @@
+import { TriggerTableItem } from './../user-dashboard/user-dashboard.service';
 import { Injectable } from '@angular/core';
-import { TriggerTableItem } from './app-table.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-
+import { throwError  } from 'rxjs';
+}
 @Injectable({
   providedIn: 'root'
 })
