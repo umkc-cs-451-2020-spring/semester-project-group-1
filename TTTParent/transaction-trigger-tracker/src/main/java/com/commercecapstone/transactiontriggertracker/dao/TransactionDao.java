@@ -4,29 +4,33 @@ import java.util.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.logging.LogFile;
 import org.springframework.dao.DataAccessException;
 
 import com.commercecapstone.transactiontriggertracker.domain.TransactionDomain;
 import com.commercecapstone.transactiontriggertracker.service.TransactionRowMapper;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Repository @Slf4j
-public class TransactionDao extends BaseDao{
-	@Autowired
-    TransactionRowMapper transactionMapper;//appMapper changed as notificationMapper
-    
-    /** Gets all the notifications from the Notification Table
+public class TransactionDao extends BaseDao {
+    @Autowired
+    TransactionRowMapper transactionMapper;// appMapper changed as notificationMapper
+
+    /**
+     * Gets all the notifications from the Notification Table
      * 
      * @return List of NotificationDomain
      */
     public List<TransactionDomain> getAllTransactions() {
         List<TransactionDomain> transactionList = new ArrayList<>();
-        
+
         String typeQuery = "select * from Transaction";
-                
+
         try {
-        	transactionList = get().query(typeQuery, transactionMapper);
+            transactionList = get().query(typeQuery, transactionMapper);
             log.info("Transaction table successfully retrieved");
         } 
         catch(NullPointerException e) {
