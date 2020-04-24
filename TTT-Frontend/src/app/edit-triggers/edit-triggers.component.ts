@@ -1,10 +1,10 @@
+import { TriggerTableItem } from './../user-dashboard/user-dashboard.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 //import { EditAppService } from './../edit-app.service';
 import { FormControl, Validators, FormGroup, FormBuilder, FormsModule } from '@angular/forms';
-//import { TriggerTableItem } from './../app-table.service';
 import { Component, OnInit, OnChanges, AfterViewInit, NgModule } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
 //import { Associate } from '../login/login-response.model';
 
 interface State {
@@ -142,49 +142,53 @@ export class EditTriggersComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditTriggersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: TriggerTableItem,
     public editApp: EditTriggersComponent,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBarModule) { }
 
     session = window.sessionStorage;
    // user: Associate = JSON.parse(this.session.getItem("user"));
     entryToEdit = this.data;
-    projectNameInput = new FormControl(this.entryToEdit.jiraProject, [Validators.maxLength(100)]);
-    primaryLanguageInput = new FormControl(this.entryToEdit.primaryLanguage, [Validators.maxLength(100)]);
+    // projectNameInput = new FormControl(this.entryToEdit.jiraProject, [Validators.maxLength(100)]);
+    // primaryLanguageInput = new FormControl(this.entryToEdit.primaryLanguage, [Validators.maxLength(100)]);
     changeDate = false;
   
-    entryAppID = this.entryToEdit.appID;
-    entryBuildID = this.entryToEdit.buildID;
-    entrySandboxID = this.entryToEdit.sandboxID;
-    entrySandboxName = this.entryToEdit.sandboxName;
+    // entryAppID = this.entryToEdit.appID;
+    // entryBuildID = this.entryToEdit.buildID;
+    // entrySandboxID = this.entryToEdit.sandboxID;
+    // entrySandboxName = this.entryToEdit.sandboxName;
+    
+    entryTriggerID = this.entryToEdit.triggerID;
+    entryFunctionality = this.entryToEdit.functionality;
+    entryCurrentSettings = this.entryToEdit.currentSettings;
 
 
   ngOnInit(): void {
   }
 
 
-  enteredValue() {
-    if (this.primaryLanguageInput.value !== undefined && this.primaryLanguageInput.value !== null && this.primaryLanguageInput.value !== "" && this.primaryLanguageInput.valid) {
-      // console.log(this.primaryLanguageInput.value);
-      return true;
-    }
-    else if (this.projectNameInput.value !== undefined && this.projectNameInput.value !== null && this.projectNameInput.value !== "" && this.projectNameInput.valid) {
-      // console.log(this.projectNameInput.value);
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
+  // enteredValue() {
+  //   if (this.primaryLanguageInput.value !== undefined && this.primaryLanguageInput.value !== null && this.primaryLanguageInput.value !== "" && this.primaryLanguageInput.valid) {
+  //     // console.log(this.primaryLanguageInput.value);
+  //     return true;
+  //   }
+  //   else if (this.projectNameInput.value !== undefined && this.projectNameInput.value !== null && this.projectNameInput.value !== "" && this.projectNameInput.valid) {
+  //     // console.log(this.projectNameInput.value);
+  //     return true;
+  //   }
+  //   else {
+  //     return false;
+  //   }
+  // }
 
   /**
    * Updates build metadata with inputted FormControl values
    */
-  updateAppEntry() {
+  updateTriggerEntry() {
     // console.log("Last Static Scan: " + this.entryToEdit.lastStaticScan);
-    this.entryToEdit.jiraProject = this.projectNameInput.value;
-    this.entryToEdit.primaryLanguage = this.primaryLanguageInput.value;
-    this.entryToEdit.lastModifiedBy = this.user.id;
-    this.entryToEdit.lastStaticScan = this.entryToEdit.lastStaticScan;
-    this.entryToEdit.lastDynamicScan = this.entryToEdit.lastDynamicScan;
+    // this.entryToEdit.jiraProject = this.projectNameInput.value;
+    // this.entryToEdit.primaryLanguage = this.primaryLanguageInput.value;
+    // this.entryToEdit.lastModifiedBy = this.user.id;
+    // this.entryToEdit.lastStaticScan = this.entryToEdit.lastStaticScan;
+    // this.entryToEdit.lastDynamicScan = this.entryToEdit.lastDynamicScan;
     this.snackBar.open('Attempting to edit entry...');
     this.editApp.editEntry(this.entryToEdit).subscribe(
       data => {
@@ -200,6 +204,9 @@ export class EditTriggersComponent implements OnInit {
 
 
     this.dialogRef.close();
+  }
+  editEntry(entryToEdit: TriggerTableItem) {
+    throw new Error("Method not implemented.");
   }
 }
 

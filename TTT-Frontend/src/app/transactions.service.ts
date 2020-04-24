@@ -30,14 +30,14 @@ export class TriggerTableService {
 
   // TODO: Error handle the table
 
-  getApps(): Observable<TriggerTableItem[]> {
+  getTransaction(): Observable<TriggerTableItem[]> {
     return this.http.get<TriggerTableItem[]>('/api/apps/all')
     .pipe(
       catchError(this.handleError)
     );
   }
 
-  deleteApp(inputApp: TriggerTableItem): Observable<any> {
+  deleteTransaction(inputApp: TriggerTableItem): Observable<any> {
     return this.http.delete('/api/apps/' + inputApp.appID + '/' + inputApp.buildID)
     .pipe(
       catchError(this.handleError)
@@ -46,7 +46,7 @@ export class TriggerTableService {
 
   
    private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
 
 }

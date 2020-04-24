@@ -14,7 +14,9 @@ const httpOptions = {
 
 
 export interface TriggerTableItem {
-  
+  triggerID: number;
+  functionality: string;
+  currentSettings: string;
 }
 
 

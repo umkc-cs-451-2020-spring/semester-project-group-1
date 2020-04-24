@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Sandbox, AddAppService, VeracodeAppEntry } from '../add-app.service';
+import { MatSelectChange, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+// import { Associate } from '../login/login-response.model';
 
 
 
@@ -138,10 +142,175 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
   ];
 
 
-  constructor() { }
+  sandboxes: Sandbox[] = [];
+  public veracodeAppList: VeracodeAppEntry[] = [];
+
+  /**
+   * Filtered variables array for the mat sort.
+   */
+  public filteredVariables = this.veracodeAppList.slice();
+  session = window.sessionStorage;
+
+  /**
+   * Form control for the app name
+   */
+  appName = new FormControl('');
+
+    /**
+   * Form control for the sandbox name
+   */
+  sandboxName = new FormControl('');
+
+      // TODO: Fix this screwy logic or at least make it cleaner. Maybe create a method that just disables/enables the whole component?
+  appNotLoaded = true;
+  sandboxNotSelected = true;
+  sandboxesLoading = false;
+  sandboxBuildAdding = false;
+  promotedBuildAdding = false;
+  promotedAdded = false;
+
+  // new form control booleans
+  sandboxBuild = false;
+  promotedBuild = false;
 
 
-  ngOnInit(): void {
+  user: Associate = JSON.parse(this.session.getItem("user"));
+  // lastModifiedByInput = new FormControl('', [Validators.required, Validators.pattern('^(D|d)(T|t)[0-9]{5,6}$')]);
+
+  constructor(public appService: AddAppService,
+              public dialogRef: MatDialogRef<AddAppPageComponent>, public snackBar: MatSnackBar) { }
+
+  ngOnInit() {
+    this.snackBar.open('Attemping to retrieve app list from Veracode...');
+    this.appName.disable();
+    this.appService.getAppList().subscribe(data => {
+    this.veracodeAppList = data;
+
+    console.log(data);
+    this.filteredVariables = this.veracodeAppList.slice();
+    this.snackBar.open('App list from Veracode successfully retrieved', 'Okay', {
+      duration: 3000
+    });
+    this.appName.enable();
+
+      }, (err) => {
+        this.snackBar.open(err, 'Okay', {
+          duration: 3000
+        });
+      });
+  }
+
+
+  /**
+   * Retrieves a list of sandboxes for an application and pipes it int the sandbox FormControl.
+   */
+  searchApps() {
+    this.snackBar.open('Attemping to load sandboxes...');
+
+    this.sandboxesLoading = true;
+    this.promotedAdded = false;
+    this.appNotLoaded = true;
+    this.appName.disable();
+
+    this.appService.getSandboxNames(this.appName.value.appID).subscribe(data => {
+      // this.appService.handleError();
+      this.sandboxes = data;
+
+      // console.log(data);
+      // console.log(this.sandboxes);
+
+      this.appNotLoaded = false;
+
+      this.snackBar.open('Sandboxes for ' + this.appName.value.appName + ' loaded', 'Okay', {
+        duration: 3000
+      });
+
+      this.sandboxesLoading = false;
+      this.appName.enable();
+      this.sandboxName.enable();
+
+    }, (err) => {
+      this.snackBar.open(err, 'Okay', {
+        duration: 3000
+      });
+
+      this.sandboxesLoading = false;
+    });
+
+    // console.log(this.sandboxes); - List of Sandbox Objects
+  }
+
+  /**
+   * Adds a sandbox build to the database given inputted values for application name and sandbox name
+   */
+  addApp() {
+
+    this.snackBar.open('Adding latest build from ' + this.sandboxName.value.sandboxName + '...');
+
+    this.sandboxBuildAdding = true;
+    this.sandboxNotSelected = true;
+    this.appName.disable();
+    this.sandboxName.disable();
+
+    this.appService.addSandboxBuild(this.appName.value.appName, this.sandboxName.value.sandboxID,
+      this.user.id).subscribe(data => {
+      this.sandboxBuildAdding = false;
+      this.snackBar.open('Latest build from ' + this.sandboxName.value.sandboxName + ' added to the database', 'Okay', {
+        duration: 3000
+      });
+      this.appName.enable();
+      this.sandboxName.enable();
+    }, (err) => {
+      this.snackBar.open(err, 'Okay', {
+        duration: 3000
+      });
+    });
+  }
+
+  /**
+   * Adds a latest promoted build to the database given inputted value for application name.
+   */
+  addPromoted() {
+    this.snackBar.open('Adding latest promoted build from ' + this.appName.value.appName + ' if one exists...');
+    this.promotedBuildAdding = true;
+    this.appName.disable();
+    this.sandboxName.disable();
+    this.appService.addPromotedBuild(this.appName.value.appName, this.user.id).subscribe(data => {
+      this.promotedBuildAdding = false;
+      this.snackBar.open('Latest promoted build added', 'Okay', {
+        duration: 3000
+      });
+      this.promotedAdded = true;
+      this.appName.enable();
+      this.sandboxName.enable();
+    }, (err) => {
+      this.snackBar.open(err, 'Okay', {
+        duration: 3000
+      });
+    });
+
+  }
+
+  /**
+   * Flips sandboxNotSelected to false in order to disble some FormControls
+   */
+  onSelect() {
+    this.sandboxNotSelected = false;
+  }
+
+  /**
+   * Disables the appName FormControl
+   */
+  disableSearchBar() {
+    this.appName.disable();
+  }
+
+  /**
+   * Reenables some FormControls
+   */
+  onInputChange() {
+    this.appNotLoaded = true;
+    this.appName.enable();
   }
 
 }
