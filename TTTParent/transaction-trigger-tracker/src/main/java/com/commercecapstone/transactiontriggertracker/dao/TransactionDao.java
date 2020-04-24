@@ -122,7 +122,7 @@ public class TransactionDao extends BaseDao {
     
     public ResponseEntity<Object> addTransaction(TransactionDomain inputTransaction){
 
-        String typeQuery = "INSERT INTO Transaction(Transaction_type, Transaction_time, State, Category, Transaction_description, Ammunt, Account_ID) " +
+        String typeQuery = "INSERT INTO Transaction(Transaction_type, Transaction_time, State, Category, Transaction_description, Amount, Account_ID) " +
                 "VALUES (:inTransaction_type, :inTransaction_time, :inState, :inCategory, :inTransaction_description, :inAmount, :inAccount_ID) " + 
                 "ON DUPLICATE KEY UPDATE Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Amount = :inAmount, Account_ID = :inAccount_ID; " ;
         Map<String, Object> inputTransactionParams = new HashMap<String, Object>();
