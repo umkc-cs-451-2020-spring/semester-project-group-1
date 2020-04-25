@@ -24,8 +24,8 @@ export interface EndTime {
 export class AddTriggerService {
   constructor(private http: HttpClient) { }
 
-  getState(inputAppName: string): Observable<State[]> {
-    return this.http.get<State[]>('/api/apps/sandbox/' + inputAppName)
+  getState(inputStateName: string): Observable<State[]> {
+    return this.http.get<State[]>('/api/apps/sandbox/' + inputStateName)
       .pipe(
         catchError(this.handleError)
       );
@@ -45,19 +45,19 @@ export class AddTriggerService {
       );
   }
 
-  addTriggers(inputAppName: string, inputSandboxName: string, inputLastModifiedBy: string) {
-    return this.http.post('/api/apps/' + inputAppName + '/' + inputSandboxName, inputLastModifiedBy)
+  addTriggers(inputStateName: string, inputStartTime: string, inputEndTime: string) {
+    return this.http.post('/api/apps/' + inputStateName + '/' + inputStartTime, inputEndTime)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  addPromotedBuild(inputAppName: string, inputLastModifiedBy: string) {
-    return this.http.post('/api/apps/promoted/' + inputAppName, inputLastModifiedBy)
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
+  // addPromotedBuild(inputAppName: string, inputLastModifiedBy: string) {
+  //   return this.http.post('/api/apps/promoted/' + inputAppName, inputLastModifiedBy)
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
 
   private handleError(error: HttpErrorResponse) {
 

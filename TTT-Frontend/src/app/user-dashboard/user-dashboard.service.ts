@@ -24,6 +24,7 @@ export interface TriggerTableItem {
   providedIn: 'root'
 })
 export class UserDashboardService {
+  
 
   constructor(private http: HttpClient) { }
 
@@ -40,15 +41,14 @@ export class UserDashboardService {
   }
 
   deleteApp(inputApp: TriggerTableItem): Observable<any> {
-    return this.http.delete('/api/apps/' + inputApp.appID + '/' + inputApp.buildID)
+    return this.http.delete('/api/apps/')
     .pipe(
       catchError(this.handleError)
     );
   }
+  public handleError(error: any): Promise<any> {
+    console.error('An error occurred', error);
+    return Promise.reject(error.message || error);
+}
 
-  refreshApps(apps: TriggerTableItem[]): Observable<any> {
-    return this.http.post('/api/apps/refresh', apps)
-    .pipe(
-      catchError(this.handleError)
-    );
 }
