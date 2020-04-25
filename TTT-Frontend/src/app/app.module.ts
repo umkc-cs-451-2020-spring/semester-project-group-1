@@ -20,7 +20,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
-import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {ViewTriggersComponent } from './view-triggers/view-triggers.component';
+
 
 
 
@@ -50,7 +53,9 @@ import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
     MatStepperModule,
     MatSliderModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

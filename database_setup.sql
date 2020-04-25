@@ -1,4 +1,4 @@
-drop database banking_database;
+/*drop database banking_database;*/
 create database banking_database;
 use banking_database;
 
@@ -14,7 +14,7 @@ create or replace TABLE account(
     Account_type varchar(45),
     Balance float,
     User_ID int,
-    CONSTRAINT FOREIGN KEY USER_ID (User_ID) REFERENCES user(User_ID)
+    /*CONSTRAINT FOREIGN KEY USER_ID (User_ID) REFERENCES user(User_ID)*/
 )engine = InnoDB;
 
 create or replace TABLE transaction(
@@ -25,8 +25,8 @@ create or replace TABLE transaction(
     Category varchar(45),
     Transaction_description text,
     Amount float,
-    Account_ID int,
-    CONSTRAINT FOREIGN KEY ACCOUNT_ID (Account_ID) REFERENCES account(Account_ID)
+    Account_ID int
+    /*CONSTRAINT FOREIGN KEY ACCOUNT_ID (Account_ID) REFERENCES account(Account_ID)*/
 )engine = InnoDB;
 
 create or replace TABLE notification(
@@ -43,7 +43,7 @@ create or replace TABLE state_trigger(
 	Trigger_ID int PRIMARY KEY AUTO_INCREMENT,
     User_ID int DEFAULT NULL UNIQUE,
     Trigger_rule varchar(255),
-    CONSTRAINT FOREIGN KEY USER_ID1 (User_ID) REFERENCES user(User_ID)
+    /*CONSTRAINT FOREIGN KEY USER_ID1 (User_ID) REFERENCES user(User_ID)*/
 )engine = InnoDB;
 
 create or replace TABLE category_trigger(
