@@ -19,7 +19,7 @@ import com.commercecapstone.transactiontriggertracker.dao.CategoryTriggerDAO;
 import com.commercecapstone.transactiontriggertracker.domain.CategoryTriggerDomain;
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/categoryTrigger")
 public class CategoryTriggerController {
 	
 	@Autowired
@@ -38,13 +38,13 @@ public class CategoryTriggerController {
 	}
 	
 	// Add a category trigger domain
-	@PostMapping("/all")
+	@PostMapping("/add")
 	public ResponseEntity<Object> addCategoryTrigger(@RequestBody @Valid @NonNull CategoryTriggerDomain inputTrigger){
 		return categoryTriggerDao.addCategoryTrigger(inputTrigger);
 	}
 	
 	// Update a category trigger domain
-	@PutMapping("/all")
+	@PutMapping("/update")
 	public ResponseEntity<Object> updateCategoryTrigger(CategoryTriggerDomain inputTrigger) {
 		return categoryTriggerDao.updateCategoryTrigger(inputTrigger);
 	}
