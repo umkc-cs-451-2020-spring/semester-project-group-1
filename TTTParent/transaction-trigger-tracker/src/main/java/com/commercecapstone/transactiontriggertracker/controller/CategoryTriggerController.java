@@ -38,13 +38,13 @@ public class CategoryTriggerController {
 	}
 	
 	// Add a category trigger domain
-	@PostMapping("/add")
+	@PostMapping("/all")
 	public ResponseEntity<Object> addCategoryTrigger(@RequestBody @Valid @NonNull CategoryTriggerDomain inputTrigger){
 		return categoryTriggerDao.addCategoryTrigger(inputTrigger);
 	}
 	
 	// Update a category trigger domain
-	@PutMapping("/update")
+	@PutMapping("/all")
 	public ResponseEntity<Object> updateCategoryTrigger(CategoryTriggerDomain inputTrigger) {
 		return categoryTriggerDao.updateCategoryTrigger(inputTrigger);
 	}
