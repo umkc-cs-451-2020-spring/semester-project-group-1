@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type' : 'application/json'
+    'Content-Type': 'application/json'
   })
 };
 
 
 export interface TriggerTableItem {
-  
+
 }
 
 
@@ -32,24 +33,31 @@ export class TriggerTableService {
 
   getTransaction(): Observable<TriggerTableItem[]> {
     return this.http.get<TriggerTableItem[]>('/api/apps/all')
-    .pipe(
-      catchError(this.handleError)
-    );
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   deleteTransaction(inputApp: TriggerTableItem): Observable<any> {
-    return this.http.delete('/api/apps/' + inputApp.appID + '/' + inputApp.buildID)
-    .pipe(
-      catchError(this.handleError)
-    );
+    return this.http.delete('/api/apps/')
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
-  
-   public handleError(error: any): Promise<any> {
+  editTrigger(inputApp: TriggerTableItem): Observable<any> {
+    return this.http.get('/api/apps/')
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
+  public handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
 
-}
+  }
 
 
 }

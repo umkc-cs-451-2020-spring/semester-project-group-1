@@ -1,28 +1,23 @@
+import { ViewTransactionsComponent } from './../view-transactions/view-transactions.component';
+import { EditTriggerService } from './../edit-triggers/edit-trigger.service';
 import { TriggerTableItem, TriggerTableService } from './../transactions.service';
-//import { AppMetadataComponent } from './../app-metadata/app-metadata.component';
-//import { BuildFlawsTableComponent } from './../build-flaws-view/build-flaws-view.component';
-//import { AddAppPageComponent } from './../add-app-page/add-app-page.component';
-//import { HighLevelReportWizardComponent } from './../high-level-report-wizard/high-level-report-wizard.component';
 import { EditTriggersComponent } from './../edit-triggers/edit-triggers.component';
 import { AddTriggersComponent } from './../add-triggers/add-triggers.component';
-import { ViewTriggersComponent } from './../view-triggers/view-triggers.component';
-import { ViewNotificationsComponent } from './../view-notifications/view-notifications.component';
-import { ViewTransactionsComponent } from './../view-transactions/view-transactions.component';
-//import { AppTableService } from './../app-table.service';
 import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
-// import { MatPaginator, MatSort, MatTable, MatTableDataSource, MatDialog,
-//   MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig, MatSnackBar, MatIconRegistry, MatTooltip,
-//   TooltipPosition, throwToolbarMixedModesError } from '@angular/material';
-import { MatPaginator, MatSort, MatTable, MatTableDataSource, MatDialog, MatSnackBar, MatIconRegistry, TooltipPosition} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
-import {DomSanitizer} from '@angular/platform-browser';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { TooltipPosition } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatIconRegistry } from '@angular/material/icon';
+import { SelectionModel } from '@angular/cdk/collections';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-//import { FlawTableService } from '../flaw-table.service';
 import { Observable } from 'rxjs';
-//import { Associate } from '../login/login-response.model';
 import { map } from 'rxjs/operators';
 import { AppRoutingModule } from '../app-routing.module';
-
+import { trigger } from '@angular/animations';
 
 
 @Component({
@@ -32,23 +27,22 @@ import { AppRoutingModule } from '../app-routing.module';
 })
 export class UserDashboardComponent implements OnInit, AfterViewInit {
 
-  
-   /**
-   * Paginator for the table
-   */
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  /**
+  * Paginator for the table
+  */
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   /**
    * Sorter for the table
    */
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   /**
    * The Application table
    *
    * Note that "application" in this context refers to a scanned application build on Veracode.
    */
-  @ViewChild(MatTable, {static: false}) table: MatTable<TriggerTableItem>;
+  @ViewChild(MatTable, { static: false }) table: MatTable<TriggerTableItem>;
 
   /**
    * Build table's data source
@@ -84,11 +78,11 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
    * The array of column names for the table to use
    */
   displayedColumns = ['Buttons', 'appName', /*'appID', 'sandboxID', 'buildID',*/ 'Transaction_ID', 'Transaction_type', 'Transaction_time',
-                      'State', 'Category', 'Transaction_description', 'Amount',
+    'State', 'Category', 'Transaction_description', 'Amount',
                       /* 'lastExcelReport','email',*/ 'Account_id', /*'activeStatus', */];
 
   constructor(public appTable: TriggerTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
-              public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router) {
+    public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router) {
     iconRegistry.addSvgIcon(
       'add-trigger',
       sanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-add_box-24px.svg'));
@@ -118,7 +112,7 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
         duration: 1000
       });
     }, (err) => {
-      this.snackBar.open(err, 'Okay', { duration: 10000});
+      this.snackBar.open(err, 'Okay', { duration: 10000 });
     });
   }
 
@@ -157,142 +151,90 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
       // this.state$ = this.activatedRoute.paramMap.pipe(map(() => window.history.state));
       // this.state$.subscribe(data => {
       //   this.user = data[0];
-        const auth = this.session.getItem('authHeader');
-        this.session.clear();
-        this.session.setItem('authHeader', auth);
-        // this.session.setItem('user', JSON.stringify(this.user));
-        this.session.setItem('start', JSON.stringify(new Date()));
-      };
-      // this.nullCheck();
-      this.loggedIn = true;
-      this.refreshTable();
-    }
-
+      const auth = this.session.getItem('authHeader');
+      this.session.clear();
+      this.session.setItem('authHeader', auth);
+      // this.session.setItem('user', JSON.stringify(this.user));
+      this.session.setItem('start', JSON.stringify(new Date()));
+    };
+    // this.nullCheck();
+    this.loggedIn = true;
+    this.refreshTable();
   }
 
-  /**
-   * Redirects the user to the login page if user is undefeind
-   */
-  // public nullCheck() {
-  //   /* If user is null, redirect to login and clear session */
-  //   if (this.user === undefined || this.user.id === undefined) {
-  //     this.session.clear();
-  //     this.router.navigate(['Login']);
-  //   }
-  // }
+}
 
-  // ngAfterViewInit() {
-  //   if (this.loggedIn){
-  //     this.refreshTable();
-  //   }
 
-  // }
 
-  /**
-   * Navigates to the [edit component]{@link EditAppPageComponent} for scan-specific metadata
-   *
-   * Note that "application" in this context refers to a scanned application build on Veracode.
-   *
-   * @param selectedRow The selected table entry
-   */
-  toEditTrigger(selectedRow: TriggerTableService), {
-      const dialogRef = this.dialog.open(EditTriggersComponent, {
-        width: '20em',
-        maxHeight: '90vh',
-        data: selectedRow
-      });
+/**
+ * Redirects the user to the login page if user is undefeind
+ */
+// public nullCheck() {
+//   /* If user is null, redirect to login and clear session */
+//   if (this.user === undefined || this.user.id === undefined) {
+//     this.session.clear();
+//     this.router.navigate(['Login']);
+//   }
+// }
 
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('dialog closed');
-        this.refreshTable();
-        this.selection.clear();
-        });
-    }
+// ngAfterViewInit() {
+//   if (this.loggedIn){
+//     this.refreshTable();
+//   }
 
-  /**
-   * Navigates to the ["Add New Application"]{@link AddAppPageComponent} stepper component
-   *
-   * Note that "application" in this context refers to a scanned application build on Veracode.
-   */
-  toAddTrigger() {
-    const dialogRef = this.dialog.open(AddTriggersComponent, {
-      width: '45em',
-      maxHeight: '90vh'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog closed');
+// }
+
+/**
+ * Navigates to the [edit component]{@link EditTriggersComponent} for scan-specific metadata
+ *
+ * Note that "application" in this context refers to a scanned application build on Veracode.
+ *
+ * @param selectedRow The selected table entry
+ */
+openDialog(selectedRow: EditTriggersComponent) , {
+  const dialogRef = this.dialog.open(EditTriggersComponent, {
+    width: '20em',
+    maxHeight: '90vh',
+    data: selectedRow
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('dialog closed');
+    this.refreshTable();
+    this.selection.clear();
+  });
+}
+
+/**
+ * Navigates to the ["Add New Application"]{@link AddTriggersComponent} stepper component
+ *
+ * Note that "application" in this context refers to a scanned application build on Veracode.
+ */
+toAddTrigger() {
+  const dialogRef = this.dialog.open(AddTriggersComponent, {
+    width: '45em',
+    maxHeight: '90vh'
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('dialog closed');
+    this.refreshTable();
+    this.selection.clear();
+  });
+}
+
+/**
+ * Deletes the selected entry from the table. Prompts the user for confirmation before deletion.
+ *
+ * @param selectedRow The selected table entry
+ *
+ * Note that "application" in this context refers to a scanned application build on Veracode.
+ */
+viewTransactions(selectedRow: ViewTransactionsComponent) {
+  if (confirm('Are you sure you want to delete?')) {
+    this.appTable.deleteApp(selectedRow).subscribe(result => {
       this.refreshTable();
       this.selection.clear();
     });
-  }
-
-  /**
-   * Navigates to the ["High Level Report"]{@link HighLevelReportWizardComponent} stepper component
-   */
-  toHighLevelWizard() {
-    const dialogRef = this.dialog.open(HighLevelReportWizardComponent, {
-      width: '40em',
-      maxHeight: '90vh'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('dialog closed');
-      this.refreshTable();
-      this.selection.clear();
-    });
-  }
-
-  /**
-   * Navigates to the [application flaws]{@link BuildFlawsViewComponent} component.
-   *
-   * Note that "application" in this context refers to a scanned application build on Veracode.
-   */
-  toAppFlaws(selectedRow: TriggerTableItem) {
-    this.router.navigateByUrl('/app/flaws',
-      { state:  selectedRow } );
-  }
-
-  /**
-   * Deletes the selected entry from the table. Prompts the user for confirmation before deletion.
-   *
-   * @param selectedRow The selected table entry
-   *
-   * Note that "application" in this context refers to a scanned application build on Veracode.
-   */
-  deleteApp(selectedRow: TriggerTableItem) {
-      if (confirm('Are you sure you want to delete?')) {
-      this.appTable.deleteApp(selectedRow).subscribe(result => {
-        this.refreshTable();
-        this.selection.clear();
-      });
-    }
-  }
-
-  /**
-   * DEPRECATED
-   * @ignore
-   */
-  toSchedule(selectedRow: TriggerTableItem) {
-    this.router.navigateByUrl('/schedules',
-      { state: selectedRow });
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  /**
-   * Navigates to the [applicaiton metadata]{@link AppMetadataComponent} component.
-   *
-   */
-  toAppMeta() {
-    this.router.navigateByUrl('/Admin');
-  }
-
-  /**
-   * Please ask Tucker Diekmann what this does (DT225453)
-   */
-  whitelisted() {
-    return true;
   }
 }
+

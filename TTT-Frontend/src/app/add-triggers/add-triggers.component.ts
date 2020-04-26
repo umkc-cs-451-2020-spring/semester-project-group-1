@@ -1,7 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatSelectChange, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { AddTriggerService } from './add-trigger.service';
+// import { MatSelectChange, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddTriggerService } from './add-trigger.service'; 
 // import { Associate } from '../login/login-response.model';
 
 
@@ -88,8 +90,7 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
 
 
 
-  states: State[] = [
-    {value: 'Alabama-0', viewValue: 'Alabama'},
+  states: State[] = [{value: 'Alabama-0', viewValue: 'Alabama'},
     {value: 'Alaska-1', viewValue: 'Alaska'},
     {value: 'Arizona-2', viewValue: 'Arizona'},
     {value: 'Arkansas-3', viewValue: 'Arkansas'},
@@ -208,85 +209,86 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
   /**
    * Retrieves a list of sandboxes for an application and pipes it int the sandbox FormControl.
    */
-  searchApps() {
-    this.snackBar.open('Attemping to load sandboxes...');
+  // searchApps() {
+  //   this.snackBar.open('Attemping to load sandboxes...');
 
-    this.sandboxesLoading = true;
-    this.promotedAdded = false;
-    this.appNotLoaded = true;
-    this.appName.disable();
+  //   this.sandboxesLoading = true;
+  //   this.promotedAdded = false;
+  //   this.appNotLoaded = true;
+  //   this.appName.disable();
 
-    this.appService.getSandboxNames(this.appName.value.appID).subscribe(data => {
-      // this.appService.handleError();
-      this.sandboxes = data;
+  //   this.appService.getSandboxNames(this.appName.value.appID).subscribe(data => {
+  //     // this.appService.handleError();
+  //     this.sandboxes = data;
 
-      // console.log(data);
-      // console.log(this.sandboxes);
+  //     // console.log(data);
+  //     // console.log(this.sandboxes);
 
-      this.appNotLoaded = false;
+  //     this.appNotLoaded = false;
 
-      this.snackBar.open('Sandboxes for ' + this.appName.value.appName + ' loaded', 'Okay', {
-        duration: 3000
-      });
+  //     this.snackBar.open('Sandboxes for ' + this.appName.value.appName + ' loaded', 'Okay', {
+  //       duration: 3000
+  //     });
 
-      this.sandboxesLoading = false;
-      this.appName.enable();
-      this.sandboxName.enable();
+  //     this.sandboxesLoading = false;
+  //     this.appName.enable();
+  //     this.sandboxName.enable();
 
-    }, (err) => {
-      this.snackBar.open(err, 'Okay', {
-        duration: 3000
-      });
+  //   }, (err) => {
+  //     this.snackBar.open(err, 'Okay', {
+  //       duration: 3000
+  //     });
 
-      this.sandboxesLoading = false;
-    });
+  //     this.sandboxesLoading = false;
+  //   });
 
-    // console.log(this.sandboxes); - List of Sandbox Objects
-  }
+  //   // console.log(this.sandboxes); - List of Sandbox Objects
+  // }
 
   /**
    * Adds a sandbox build to the database given inputted values for application name and sandbox name
    */
-  addApp() {
+  // addApp() {
 
-    this.snackBar.open('Adding latest build from ' + this.sandboxName.value.sandboxName + '...');
+  //   this.snackBar.open('Adding new trigger');
 
-    this.sandboxBuildAdding = true;
-    this.sandboxNotSelected = true;
-    this.appName.disable();
-    this.sandboxName.disable();
+  //   this.sandboxBuildAdding = true;
+  //   this.sandboxNotSelected = true;
+  //   this.appName.disable();
+  //   this.sandboxName.disable();
 
-    this.appService.addSandboxBuild(this.appName.value.appName, this.sandboxName.value.sandboxID,
-      this.user.id).subscribe(data => {
-      this.sandboxBuildAdding = false;
-      this.snackBar.open('Latest build from ' + this.sandboxName.value.sandboxName + ' added to the database', 'Okay', {
-        duration: 3000
-      });
-      this.appName.enable();
-      this.sandboxName.enable();
-    }, (err) => {
-      this.snackBar.open(err, 'Okay', {
-        duration: 3000
-      });
-    });
-  }
+  //   this.appService.addSandboxBuild(this.appName.value.appName, this.sandboxName.value.sandboxID,
+  //     this.user.id).subscribe(data => {
+  //     this.sandboxBuildAdding = false;
+  //     this.snackBar.open('Latest build from ' + this.sandboxName.value.sandboxName + ' added to the database', 'Okay', {
+  //       duration: 3000
+  //     });
+  //     this.appName.enable();
+  //     this.sandboxName.enable();
+  //   }, (err) => {
+  //     this.snackBar.open(err, 'Okay', {
+  //       duration: 3000
+  //     });
+  //   });
+  // }
 
-  /**
-   * Adds a latest promoted build to the database given inputted value for application name.
-   */
-  addPromoted() {
-    this.snackBar.open('Adding latest promoted build from ' + this.appName.value.appName + ' if one exists...');
-    this.promotedBuildAdding = true;
-    this.appName.disable();
-    this.sandboxName.disable();
-    this.appService.addPromotedBuild(this.appName.value.appName, this.user.id).subscribe(data => {
-      this.promotedBuildAdding = false;
+  // /**
+  //  * Adds a latest promoted build to the database given inputted value for application name.
+  //  */
+  addTriggers() {
+    this.snackBar.open('Adding new trigger');
+    // this.promotedBuildAdding = true;
+    this.states.disable();
+    this.endTimes.disable();
+    this.startTimes.disable();
+    this.appService.addTriggers(this.states, this.startTimes, this.endTimes).subscribe(data => {
+      // this.AddTrigg = false;
       this.snackBar.open('Latest promoted build added', 'Okay', {
         duration: 3000
       });
-      this.promotedAdded = true;
-      this.appName.enable();
-      this.sandboxName.enable();
+      this.states.enable();
+      this.startTimes.enable();
+      this.endTimes.enable();
     }, (err) => {
       this.snackBar.open(err, 'Okay', {
         duration: 3000
@@ -298,23 +300,23 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
   /**
    * Flips sandboxNotSelected to false in order to disble some FormControls
    */
-  onSelect() {
-    this.sandboxNotSelected = false;
-  }
+  // onSelect() {
+  //   this.sandboxNotSelected = false;
+  // }
 
   /**
    * Disables the appName FormControl
    */
-  disableSearchBar() {
-    this.appName.disable();
-  }
+  // disableSearchBar() {
+  //   this.appName.disable();
+  // }
 
   /**
    * Reenables some FormControls
-   */
-  onInputChange() {
-    this.appNotLoaded = true;
-    this.appName.enable();
-  }
+  //  */
+  // onInputChange() {
+  //   this.appNotLoaded = true;
+  //   this.appName.enable();
+  // }
 
 }
