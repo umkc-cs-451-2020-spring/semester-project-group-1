@@ -32,26 +32,22 @@ public class NotificationController {
 		return notificationDao.getAllNotifications();
 	}
 	
+	// Get notification for specific account
+	@GetMapping("/{inputAccountID")
+    public List<NotificationDomain> getAccountNotifications(int inputAccountID) {
+		return notificationDao.getAccountNotifications(inputAccountID);
+	}
+
 	// Add a notification
 	@PostMapping("/all")
-	public ResponseEntity<Object> addNotification (@RequestBody @Valid @NonNull NotificationDomain notification){
-		Map<String, Object> inputParams = new HashMap<String,Object>();
-		inputParams.put("inputNotification_ID", notification.getNotificationID());
-		inputParams.put("inputTransaction_ID", notification.getTransactionID());
-		inputParams.put("inputNotification_type", notification.getNotificationType());
-		inputParams.put("inputNotification_description", notification.getNotificatonDescription();
-		return notificationDao.addNotification(inputParams);
-	
+	public ResponseEntity<Object> addNotification (@RequestBody @Valid @NonNull NotificationDomain inputNotification){
+		return notificationDao.addNotification(inputNotification);
 	}
 	
-	// Delete a notification based on notification ID
-	@DeleteMapping("/{notificationID}")
-	public ResponseEntity<Object> deleteNotification(@PathVariable int notificationID){
-		return notificationDao.deleteNotification(notificationID);
+	// Delete a notification based on accountID and notification ID
+	@DeleteMapping("/{accountID}/{notificationID}")
+	public ResponseEntity<Object> deleteNotification(@PathVariable int accountID, @PathVariable int notificationID){
+		return notificationDao.deleteNotification(accountID, notificationID);
 	}
 	
-	
-	
-	
-
 }

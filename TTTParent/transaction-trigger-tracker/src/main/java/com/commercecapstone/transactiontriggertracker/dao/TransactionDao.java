@@ -4,29 +4,33 @@ import java.util.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.logging.LogFile;
 import org.springframework.dao.DataAccessException;
 
 import com.commercecapstone.transactiontriggertracker.domain.TransactionDomain;
 import com.commercecapstone.transactiontriggertracker.service.TransactionRowMapper;
 
 import lombok.extern.slf4j.Slf4j;
+
 @Repository @Slf4j
-public class TransactionDao extends BaseDao{
-	@Autowired
-    TransactionRowMapper transactionMapper;//appMapper changed as notificationMapper
-    
-    /** Gets all the notifications from the Notification Table
+public class TransactionDao extends BaseDao {
+    @Autowired
+    TransactionRowMapper transactionMapper;// appMapper changed as notificationMapper
+
+    /**
+     * Gets all the notifications from the Notification Table
      * 
      * @return List of NotificationDomain
      */
     public List<TransactionDomain> getAllTransactions() {
         List<TransactionDomain> transactionList = new ArrayList<>();
-        
+
         String typeQuery = "select * from Transaction";
-                
+
         try {
-        	transactionList = get().query(typeQuery, transactionMapper);
+            transactionList = get().query(typeQuery, transactionMapper);
             log.info("Transaction table successfully retrieved");
         } 
         catch(NullPointerException e) {
@@ -118,10 +122,11 @@ public class TransactionDao extends BaseDao{
     
     public ResponseEntity<Object> addTransaction(TransactionDomain inputTransaction){
 
-        String typeQuery = "INSERT INTO Transaction(Transaction_type, Transaction_time, State, Category, Transaction_description, Ammunt, Account_ID) " +
-                "VALUES (:inTransaction_type, :inTransaction_time, :inState, :inCategory, :inTransaction_description, :inAmount, :inAccount_ID) " + 
+        String typeQuery = "INSERT INTO Transaction(Transaction_ID, Transaction_type, Transaction_time, State, Category, Transaction_description, Amount, Account_ID) " +
+                "VALUES (:inTransaction_ID, :inTransaction_type, :inTransaction_time, :inState, :inCategory, :inTransaction_description, :inAmount, :inAccount_ID) " + 
                 "ON DUPLICATE KEY UPDATE Transaction_type = :inTransaction_type, Transaction_time = :inTransaction_time, State = :inState, Category = :inCategory, Transaction_description = :inTransaction_description, Amount = :inAmount, Account_ID = :inAccount_ID; " ;
         Map<String, Object> inputTransactionParams = new HashMap<String, Object>();
+        inputTransactionParams.put("inTransaction_ID", inputTransaction.getTransactionID());
         inputTransactionParams.put("inTransaction_type", inputTransaction.getTransactionType());
         inputTransactionParams.put("inTransaction_time", inputTransaction.getTransactionTime());
         inputTransactionParams.put("inState", inputTransaction.getState());

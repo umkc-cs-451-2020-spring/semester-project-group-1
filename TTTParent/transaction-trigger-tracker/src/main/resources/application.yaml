@@ -1,6 +1,7 @@
 spring:
    datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    password: group-01
-    url: jdbc:mysql://commercemonitor.mariadb.database.azure.com:3306/banking_database
-    username:  cs451@commercemonitor
+    password: Database!
+    url: jdbc:mysql://transaction-trigger-tracker.mariadb.database.azure.com:3306/banking_database
+    username: tttracker@transaction-trigger-tracker
+    
