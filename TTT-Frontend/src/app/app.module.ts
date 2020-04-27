@@ -20,10 +20,13 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {ViewTriggersComponent } from './view-triggers/view-triggers.component';
-
+import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -54,8 +57,12 @@ import {ViewTriggersComponent } from './view-triggers/view-triggers.component';
     MatSliderModule,
     MatTableModule,
     MatMenuModule,
+    MatSnackBarModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatTooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
