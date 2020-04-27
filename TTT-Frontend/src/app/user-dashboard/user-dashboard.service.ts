@@ -19,12 +19,23 @@ export interface TriggerTableItem {
   currentSettings: string;
 }
 
+export interface TransactionTableItem {
+  transactionID: number;
+  transactionType: string;
+  transactionTime: string;
+  state: string;
+  category: string;
+  transactionDescription: string;
+  amount: string;
+  accountID: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserDashboardService {
-  
+
 
   constructor(private http: HttpClient) { }
 

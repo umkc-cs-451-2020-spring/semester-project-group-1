@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { TransactionTableItem } from './user-dashboard/user-dashboard.service';
 
 
 
@@ -31,8 +32,8 @@ export class TriggerTableService {
 
   // TODO: Error handle the table
 
-  getTransaction(): Observable<TriggerTableItem[]> {
-    return this.http.get<TriggerTableItem[]>('/api/apps/all')
+  getTransaction(): Observable<TransactionTableItem[]> {
+    return this.http.get<TransactionTableItem[]>('/api/transaction/all')
       .pipe(
         catchError(this.handleError)
       );

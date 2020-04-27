@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 // import { MatSelectChange, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AddTriggerService } from './add-trigger.service'; 
+import { AddTriggerService } from './add-trigger.service';
 // import { Associate } from '../login/login-response.model';
 
 
@@ -278,17 +278,17 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
   addTriggers() {
     this.snackBar.open('Adding new trigger');
     // this.promotedBuildAdding = true;
-    this.states.disable();
-    this.endTimes.disable();
-    this.startTimes.disable();
-    this.appService.addTriggers(this.states, this.startTimes, this.endTimes).subscribe(data => {
+    this.triggerState.disable();
+    this.triggerStartTime.disable();
+    this.triggerEndTime.disable();
+    this.appService.addTriggers(this.states[0].value, this.startTimes[0].value, this.endTimes[0].value).subscribe(data => {
       // this.AddTrigg = false;
       this.snackBar.open('Latest promoted build added', 'Okay', {
         duration: 3000
       });
-      this.states.enable();
-      this.startTimes.enable();
-      this.endTimes.enable();
+      this.triggerState.enable();
+      this.triggerStartTime.enable();
+      this.triggerEndTime.enable();
     }, (err) => {
       this.snackBar.open(err, 'Okay', {
         duration: 3000
@@ -297,26 +297,5 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
 
   }
 
-  /**
-   * Flips sandboxNotSelected to false in order to disble some FormControls
-   */
-  // onSelect() {
-  //   this.sandboxNotSelected = false;
-  // }
-
-  /**
-   * Disables the appName FormControl
-   */
-  // disableSearchBar() {
-  //   this.appName.disable();
-  // }
-
-  /**
-   * Reenables some FormControls
-  //  */
-  // onInputChange() {
-  //   this.appNotLoaded = true;
-  //   this.appName.enable();
-  // }
 
 }

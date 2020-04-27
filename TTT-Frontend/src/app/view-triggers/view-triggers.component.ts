@@ -43,13 +43,13 @@ const TRIGGER_DATA: Transactions[] = [
 @Component({
   selector: 'app-view-triggers',
   templateUrl: './view-triggers.component.html',
-  styleUrls: ['./view-triggers.component.css']
+  styleUrls: ['./view-triggers.component.scss']
 })
 
 
 export class ViewTriggersComponent implements OnInit {
 
-  
+
   /**
    * Paginator for the table
    */
@@ -112,7 +112,7 @@ export class ViewTriggersComponent implements OnInit {
    */
   displayedColumns: string[] = ['triggerNumber', 'triggerType', 'triggerSetting', 'editTrigger'];
 
-                      
+
   constructor(public appTable: TriggerTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
               public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router,
               public activatedRoute: ActivatedRoute) {
@@ -155,7 +155,7 @@ export class ViewTriggersComponent implements OnInit {
 
     if (this.session.getItem('user') !== 'undefined' && this.session.length > 1) {
       /* User data to string (for session) */
-     
+
       /* Login time to string (for session) */
       const start: Date = new Date(JSON.parse(this.session.getItem('start')));
 
@@ -175,7 +175,7 @@ export class ViewTriggersComponent implements OnInit {
         const auth = this.session.getItem('authHeader');
         this.session.clear();
         this.session.setItem('authHeader', auth);
-      
+
         this.session.setItem('start', JSON.stringify(new Date()));
       };
 

@@ -40,7 +40,8 @@ export class ViewTransactionsComponent implements OnInit {
     public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router,
     public activatedRoute: ActivatedRoute ) { }
 
-    displayedColumns: string[] = [/*'accountID',*/ 'transactionTime', 'transactionType', 'amount', /*'transactionID',*/ 'state', 'category', 'transactionDescription'];
+    displayedColumns: string[] = [/*'accountID',*/ 'transactionTime', 'transactionType', 'amount', /*'transactionID',*/
+    'state', 'category', 'transactionDescription'];
     dataSource = TRANSACTION_DATA;
 
   ngOnInit(): void {
