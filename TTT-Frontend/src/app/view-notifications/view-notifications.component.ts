@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -15,7 +16,7 @@ const NOTIFICATION_DATA: Notifications[] = [
   {notificationID: 4, description: 'Transaction over $100',  typeOfNotification: 'Cost', date: '12/04/2020', },
   {notificationID: 5, description: 'Transaction at 03:00',  typeOfNotification: 'Timeframe', date: '10/04/2020', },
   {notificationID: 6, description: 'Transaction in Texas',  typeOfNotification: 'Location', date: '29/03/2020', },
-   
+
 ];
 
 
@@ -26,10 +27,14 @@ const NOTIFICATION_DATA: Notifications[] = [
 })
 export class ViewNotificationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   displayedColumns: string[] = ['notificationID', 'date', 'typeOfNotification', 'description'];
   dataSource = NOTIFICATION_DATA;
+
+  toDashBoard(){
+    this.router.navigateByUrl('');
+  }
 
 
   ngOnInit(): void {

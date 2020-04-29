@@ -1,18 +1,20 @@
-<mat-toolbar>
+<mat-toolbar class="mat-typography">
+      <mat-toolbar-row class="header">
+        <span class="toolbar">
+          <h1>Commerce Trigger Tracker Application Dashboard</h1>
+        </span>
+        <span></span>
+        <span>
+          <button mat-icon-button matTooltip="View Notifications" (click)="toViewNotifications()" aria-label="Add App">
+            <mat-icon aria-hidden="false" aria-label="ViewNotifications">notification_important</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="View Triggers" (click)="toViewTriggers()" aria-label="View Triggers">
+            <mat-icon aria-hidden="false" aria-label="View Triggers">list</mat-icon>
+          </button>
+        </span>
 
-
-      <mat-toolbar-row>
-        <span class ="toolbar">Commerce Trigger Tracker Application Dashboard</span>
-        <span class="spacer"></span>
-        <button mat-icon-button matTooltip="To notifications" [matTooltipPosition]="abovePosition" (click)="toViewNotifications()" aria-label="Add App">
-          <mat-icon class="icon" aria-hidden="false" aria-label="ViewNotifications">notification_important</mat-icon>
-        </button>
-        <mat-icon class="icon" aria-hidden="false" aria-label="Add New Trigger">note_add</mat-icon>
-        <mat-icon class="icon" aria-hidden="false" aria-label="See Old Triggers">list</mat-icon>
-        <div class = "logout">Logout</div>
-    </mat-toolbar-row>
-
-
+        <!--<div class = "logout">Logout</div>-->
+      </mat-toolbar-row>
 </mat-toolbar>
 
 

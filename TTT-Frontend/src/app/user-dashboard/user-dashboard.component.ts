@@ -129,6 +129,10 @@ toViewNotifications() {
   this.router.navigateByUrl('app/notifications');
 }
 
+toViewTriggers(){
+  this.router.navigateByUrl('app/triggers');
+}
+
 /*
 viewTransactions(selectedRow: ViewTransactionsComponent) {
   if (confirm('Are you sure you want to delete?')) {
