@@ -120,15 +120,13 @@ toAddTrigger() {
   });
 }
 
-toViewTransctions() {
-  const dialogRef = this.dialog.open(ViewTransactionsComponent, {
-    width: '45em',
-    maxHeight: '90vh'
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('dialog closed');
-    this.refreshTable();
-  });
+toViewTransactions() {
+  this.router.navigateByUrl('app/transactions');
+}
+
+
+toViewNotifications() {
+  this.router.navigateByUrl('app/notifications');
 }
 
 /*

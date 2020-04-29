@@ -1,8 +1,15 @@
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
+import { ViewTransactionsComponent } from './view-transactions/view-transactions.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: UserDashboardComponent},
+  { path: 'app/transactions', component: ViewTransactionsComponent},
+  { path: 'app/notifications', component: ViewNotificationsComponent},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
