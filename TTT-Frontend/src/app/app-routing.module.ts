@@ -1,3 +1,4 @@
+import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { ViewTriggersComponent } from './view-triggers/view-triggers.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
@@ -7,7 +8,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', component: UserDashboardComponent},
+  { path: '', component: LoginScreenComponent},
+  { path: 'app/dashboard', component: UserDashboardComponent},
   { path: 'app/transactions', component: ViewTransactionsComponent},
   { path: 'app/notifications', component: ViewNotificationsComponent},
   { path: 'app/triggers', component: ViewTriggersComponent},

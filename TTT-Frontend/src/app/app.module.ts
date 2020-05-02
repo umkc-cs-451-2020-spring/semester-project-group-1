@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ViewNotificationsComponent } from './view-notifications/view-notifications.component';
@@ -27,7 +27,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { HttpClientModule } from '@angular/common/http';
-
+import {MatInputModule} from '@angular/material/input';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -39,13 +40,13 @@ import { HttpClientModule } from '@angular/common/http';
     ViewNotificationsComponent,
     AddTriggersComponent,
     ViewTriggersComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatIconModule,
@@ -61,7 +62,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatDialogModule,
     MatTooltipModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

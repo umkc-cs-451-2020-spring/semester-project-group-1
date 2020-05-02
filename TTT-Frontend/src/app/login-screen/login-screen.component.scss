@@ -4,7 +4,6 @@
     margin-top: 5.5%;
     max-width: 500px;
     vertical-align: center;
-    background-color: whitesmoke;
 }
 
 .login-button{
@@ -12,17 +11,16 @@
     margin-top: 5%;
     text-align: center;
     background-color: #306237;
-    color: white;
+    //color:#306237;
 }
 
-.login-header{
-    margin: auto;
-    margin-bottom: 0%;
-    text-align: center;
-    color: #393F3A;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+.header{
+  background-color: #306237;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  color: black;
 }
 
 .login-form{
@@ -53,17 +51,11 @@ img {
     color: #393F3A;
 }
 
-.mat-form-field {
+/*.mat-form-field {
     display: inline-block;
     accountID: relative;
     text-align: center;
-}
-
-.forgot-password {
-    font-size: 10px;
-    color:#393F3A;
-    text-align: center;
-}
+}*/
 
 .mat-form-field-infix{
     padding: 0px;

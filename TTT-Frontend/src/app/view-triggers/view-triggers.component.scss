@@ -1,32 +1,96 @@
 .toolbar {
-    background-color: #306237;
-    height: 10%;
-    text-align: center;
-    padding-top: 25px;
-    font-size: 3vw;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #393F3A;
+  //background-color: #306237;
+  //text-align: center;
+  padding-top: 15px;
+  //font-size: 3vw;
+  //display:grid;
+//  align-items: center;
+//  justify-content: center;
+//  align-content: center;
+  font-weight: bold;
+  //font-family: Arial, Helvetica, sans-serif;
+  color: #393F3A;
 }
 
-.toolbarButton {
-    margin: auto;
-    text-align: center;
-    background-color: white;
-    color: green;
-    float: left;
-    margin-left: 20px;
+.header{
+  background-color: #306237;
 }
 
 table {
-    width: 100%;
-  }
+  width: 100%;
+  table-layout: fixed;
+  text-overflow: ellipsis;
+}
+
+
+mat-header-cell{
+  display:flex;
+  justify-content:center;
+  text-overflow: ellipsis;
+  align-content: center;
+  text-align: center;
+}
+
+
+
+mat-cell{
+  display:flex;
+  justify-content: flex-end;
+  align-content: center;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+
+.mat-table{
+  width: 100% !important;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  //flex: 0 0 100px !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+
+  // Instead use this non-standard one:
+  word-break: break-word;
+
+  // Adds a hyphen where the word breaks, if supported (No Blink)
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+
+.seeAllTransactions{
+    text-align: center;
+    background-color: #306237;
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.toolbarSpread {
+    text-align: center;
+    background-color: #306237;
+    color: white;
+    float: right;
+    margin-top: 30px;
+    margin-right: 10px;
+}
 
 .icon {
     padding: 0 14px;
     padding-top: 55px;
   }
-  
-.spacer {
+
+  .spacer {
     flex: 1 1 auto;
+  }
+
+  .logout {
+      background-color: #306237;
+      padding: 0 14px;
+      padding-top: 55px;
   }

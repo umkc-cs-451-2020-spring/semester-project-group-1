@@ -3,8 +3,11 @@
         <span class="toolbar">
           <h1>Commerce Trigger Tracker Application Dashboard</h1>
         </span>
-        <span></span>
+        <span class="spacer"></span>
         <span>
+          <button mat-icon-button matTooltip="Refresh Table" (click)="refreshTable()" aria-label="Resfresh Table">
+            <mat-icon aria-hidden="false" aria-label="Refresh Table">refresh</mat-icon>
+          </button>
           <button mat-icon-button matTooltip="View Notifications" (click)="toViewNotifications()" aria-label="Add App">
             <mat-icon aria-hidden="false" aria-label="ViewNotifications">notification_important</mat-icon>
           </button>
@@ -19,75 +22,55 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table matSort [dataSource]="dataSource" class="full-width-table mat-elevation-z8">
 
   <ng-container matColumnDef="accountID">
-    <th mat-header-cell *matHeaderCellDef> Account ID </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Account ID </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.accountID}} </td>
   </ng-container>
 
   <ng-container matColumnDef="transactionTime">
-    <th mat-header-cell *matHeaderCellDef> Time of Transaction </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Time of Transaction </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.transactionTime}} </td>
   </ng-container>
 
   <ng-container matColumnDef="transactionType">
-    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.transactionType}} </td>
   </ng-container>
 
   <ng-container matColumnDef="transactionID">
-    <th mat-header-cell *matHeaderCellDef> Transaction ID </th>
+    <th mat-header-cell *matHeaderCellDef  mat-sort-header> Transaction ID </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.transactionID}} </td>
   </ng-container>
 
   <ng-container matColumnDef="state">
-    <th mat-header-cell *matHeaderCellDef> State </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.state}} </td>
   </ng-container>
 
   <ng-container matColumnDef="category">
-    <th mat-header-cell *matHeaderCellDef> Category </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.category}} </td>
   </ng-container>
 
   <ng-container matColumnDef="transactionDescription">
-    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.transactionDescription}} </td>
   </ng-container>
 
   <ng-container matColumnDef="amount">
-    <th mat-header-cell *matHeaderCellDef> Amount </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
     <td mat-cell *matCellDef="let transaction"> {{transaction.amount}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<button mat-button class="seeAllTransactions">See all transactions</button>
+<!-- Limits the amount per page -->
+<mat-paginator #paginator
+    [length]="dataSource?.data.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 50, 100, 250]">
+</mat-paginator>

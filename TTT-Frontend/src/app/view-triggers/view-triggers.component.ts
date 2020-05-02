@@ -110,7 +110,7 @@ export class ViewTriggersComponent implements OnInit {
   /**
    * The array of column names for the table to use
    */
-  displayedColumns: string[] = ['triggerNumber', 'triggerType', 'triggerSetting', 'editTrigger'];
+  displayedColumns: string[] = [/*'triggerNumber',*/ 'triggerType', 'triggerSetting', 'editTrigger'];
 
 
   constructor(public appTable: TriggerTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
@@ -129,7 +129,7 @@ export class ViewTriggersComponent implements OnInit {
       duration: 3000
     });
     this.appTable.getTransaction().subscribe(data => {
-      this.dataSource.data = data;
+      this.dataSource.data = TRIGGER_DATA;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.snackBar.open('Table successfully loaded!', 'Okay', {
@@ -181,6 +181,10 @@ export class ViewTriggersComponent implements OnInit {
 
       this.loggedIn = true;
       this.refreshTable();
+    }
+
+    toDashboard(){
+      this.router.navigateByUrl('/app/dashboard');
     }
 
   }

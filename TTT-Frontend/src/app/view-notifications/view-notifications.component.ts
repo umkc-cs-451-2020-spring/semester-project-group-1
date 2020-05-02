@@ -33,7 +33,7 @@ export class ViewNotificationsComponent implements OnInit {
   dataSource = NOTIFICATION_DATA;
 
   toDashBoard(){
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('app/dashboard');
   }
 
 

@@ -1,9 +1,19 @@
-<div class="toolbar">
-    <mat-toolbar-row>
-      <span>Commerce Trigger Tracker Application</span>
-      <button mat-button class="toolbarButton" (click)="toDashBoard()">Return to dash</button>
-    </mat-toolbar-row>
-  </div>
+<mat-toolbar class="mat-typography">
+  <mat-toolbar-row class="header">
+    <span class="toolbar">
+      <h1>Commerce Trigger Tracker Application Dashboard</h1>
+    </span>
+    <span class="spacer"></span>
+    <span>
+      <button mat-icon-button matTooltip="Refresh Table" aria-label="Refresh Table">
+        <mat-icon aria-hidden="false" aria-label="Refresh Table">refresh</mat-icon>
+      </button>
+      <button mat-raised-button class="toolbarButton" (click)="toDashBoard()">Return to dash</button>
+    </span>
+
+    <!--<div class = "logout">Logout</div>-->
+  </mat-toolbar-row>
+</mat-toolbar>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
