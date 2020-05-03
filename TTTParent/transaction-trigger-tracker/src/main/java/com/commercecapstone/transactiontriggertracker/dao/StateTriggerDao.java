@@ -81,17 +81,17 @@ public class StateTriggerDao extends BaseDao{
     /*
      * Adds an inputted user's state trigger
      */
-    public ResponseEntity<Object> addStateTrigger(StateTriggerDomain inputTrigger){
+    public ResponseEntity<Object> addStateTrigger(String inputTrigger){
 
         String typeQuery = "INSERT INTO State_Trigger(User_ID, Trigger_Rule) " +
-                "VALUES (:inUserID, :inTriggerRule)";
+                "VALUES (1, :inTriggerRule)";
         Map<String, Object> inputTriggerParams = new HashMap<String, Object>();
-        inputTriggerParams.put("inUserID", inputTrigger.getUserID());
-        inputTriggerParams.put("inTriggerRule", inputTrigger.getRule());
+        //inputTriggerParams.put("inUserID", inputTrigger.getUserID());
+        inputTriggerParams.put("inTriggerRule", inputTrigger);
         
         try {
             get().update(typeQuery, inputTriggerParams);
-            log.info("Trigger added for UserID {} with the following state rule: {}", inputTrigger.getUserID(), inputTrigger.getRule());
+            log.info("Trigger added with the following state rule: {}", inputTrigger);
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         }  catch(NullPointerException e) {
             log.error(e.getMessage());
@@ -148,18 +148,18 @@ public class StateTriggerDao extends BaseDao{
     /** 
      * Deletes a user's state trigger.
      */
-    public ResponseEntity<Object> deleteStateTrigger(int triggerID, int userID) {
+    public ResponseEntity<Object> deleteStateTrigger(int triggerID) {
         
-        String typeQuery = "delete from State_trigger where trigger_ID = :inTriggerID and User_ID = :inUserID";
+        String typeQuery = "delete from State_trigger where trigger_ID = :inTriggerID";
         
         Map<String, Object> params = new HashMap<String,Object>();
         params.put("inTriggerID", triggerID);
-        params.put("inUserID", userID);
+        //params.put("inUserID", userID);
         
         
         try {
             get().update(typeQuery, params);
-            log.info("Deleted State Trigger with UserID {} and TriggerID {}", userID, triggerID);
+            log.info("Deleted State Trigger with TriggerID {}", triggerID);
             return new ResponseEntity<Object>(HttpStatus.ACCEPTED);
         } catch(NullPointerException e) {
             log.error(e.getMessage());

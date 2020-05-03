@@ -4,31 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpHeaders, HttpParams } from '@angular/common/http';
 
-
+/*
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type' : 'application/json'
   })
 };
-
-
-export interface TriggerTableItem {
-  triggerID: number;
-  functionality: string;
-  currentSettings: string;
-}
-
-export interface TransactionTableItem {
-  transactionID: number;
-  transactionType: string;
-  transactionTime: string;
-  state: string;
-  category: string;
-  transactionDescription: string;
-  amount: string;
-  accountID: number;
-}
 
 
 @Injectable({
@@ -63,3 +45,4 @@ export class UserDashboardService {
 }
 
 }
+*/

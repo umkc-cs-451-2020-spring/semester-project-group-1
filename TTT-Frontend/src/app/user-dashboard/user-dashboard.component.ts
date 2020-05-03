@@ -1,6 +1,5 @@
 import { ViewTransactionsComponent } from './../view-transactions/view-transactions.component';
-import { EditTriggerService } from './../edit-triggers/edit-trigger.service';
-import { TriggerTableItem, TriggerTableService } from './../transactions.service';
+import { TransactionTableItem, TransactionTableService } from './../transactions.service';
 import { EditTriggersComponent } from './../edit-triggers/edit-triggers.component';
 import { AddTriggersComponent } from './../add-triggers/add-triggers.component';
 import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
@@ -18,7 +17,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppRoutingModule } from '../app-routing.module';
 // import { trigger } from '@angular/animations';
-import { TransactionTableItem } from './user-dashboard.service';
+
 
 
 @Component({
@@ -48,7 +47,7 @@ export class UserDashboardComponent implements OnInit {
   displayedColumns: string[] = [/*'accountID',*/ 'transactionTime', 'transactionType', 'amount', /*'transactionID',*/
   'state', 'category', 'transactionDescription'];
 
-  constructor(public appTable: TriggerTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
+  constructor(public transactionService: TransactionTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
               public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router) {
   }
 
@@ -59,7 +58,7 @@ export class UserDashboardComponent implements OnInit {
     this.snackBar.open('Attempting to refresh table...', 'Okay', {
       duration: 3000
     });
-    this.appTable.getTransaction().subscribe(data => {
+    this.transactionService.getTransaction().subscribe(data => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;

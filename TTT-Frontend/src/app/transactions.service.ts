@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { TransactionTableItem } from './user-dashboard/user-dashboard.service';
+import { TriggerTableItem } from './triggers.service';
 
 
 
@@ -15,15 +15,21 @@ const httpOptions = {
 };
 
 
-export interface TriggerTableItem {
-
+export interface TransactionTableItem {
+  transactionID: number;
+  transactionType: string;
+  transactionTime: string;
+  state: string;
+  category: string;
+  transactionDescription: string;
+  amount: string;
+  accountID: number;
 }
-
 
 @Injectable({
   providedIn: 'root'
 })
-export class TriggerTableService {
+export class TransactionTableService {
 
   constructor(private http: HttpClient) { }
 
@@ -38,21 +44,6 @@ export class TriggerTableService {
         catchError(this.handleError)
       );
   }
-
-  deleteTransaction(inputApp: TriggerTableItem): Observable<any> {
-    return this.http.delete('/api/apps/')
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  editTrigger(inputApp: TriggerTableItem): Observable<any> {
-    return this.http.get('/api/apps/')
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
 
   public handleError(error: any): Promise<any> {
     console.error('An error occurred', error);

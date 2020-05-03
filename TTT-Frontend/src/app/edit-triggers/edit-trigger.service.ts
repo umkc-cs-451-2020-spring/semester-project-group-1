@@ -1,9 +1,9 @@
-import { TriggerTableItem } from './../user-dashboard/user-dashboard.service';
+import { TriggerTableItem } from './../triggers.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError  } from 'rxjs';
-
+/*
 @Injectable({
   providedIn: 'root'
 })
@@ -34,5 +34,6 @@ export class EditTriggerService {
       'Something went wrong. Please try again or check console');
   }
 
-  
+
 }
+*/

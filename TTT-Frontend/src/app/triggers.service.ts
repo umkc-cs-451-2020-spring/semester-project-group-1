@@ -1,42 +1,48 @@
-import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 
-/*
+export interface TriggerTableItem {
+  userID: number;
+  triggerID: number;
+  rule: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class AddTriggerService {
+export class TriggersService {
+
   constructor(private http: HttpClient) { }
 
-  getState(inputStateName: string): Observable<State[]> {
-    return this.http.get<State[]>('/api/apps/sandbox/' + inputStateName)
+  addTrigger(inputRule: String) {
+    return this.http.post('/api/StateTrigger/add/' + inputRule, {})
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getStartTime(): Observable<StartTime[]> {
-    return this.http.get<StartTime[]>('/api/apps/list')
+  getTriggers(): Observable<TriggerTableItem[]> {
+    return this.http.get<TriggerTableItem[]>('/api/StateTrigger/all')
+        .pipe(
+          catchError(this.handleError)
+        );
+  }
+
+  editTrigger(inputTrigger: TriggerTableItem){
+    return this.http.put('/api/StateTrigger/update', inputTrigger)
       .pipe(
         catchError(this.handleError)
       );
   }
 
-  getEndTime(): Observable<EndTime[]> {
-    return this.http.get<EndTime[]>('/api/apps/list')
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  addTriggers(inputStateName: string, inputStartTime: string, inputEndTime: string) {
-    return this.http.post('/api/apps/' + inputStateName + '/' + inputStartTime, inputEndTime)
-      .pipe(
-        catchError(this.handleError)
-      );
+  deleteTrigger(inputTriggerID: number){
+    return this.http.delete('/api/StateTrigger/delete/' + inputTriggerID)
+    .pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -53,4 +59,3 @@ export class AddTriggerService {
       'Something went wrong. Please try again or check console');
   }
 }
-*/

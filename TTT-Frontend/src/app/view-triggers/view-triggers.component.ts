@@ -1,8 +1,6 @@
-import { LoginScreenComponent } from './../login-screen/login-screen.component';
-import { ViewTransactionsComponent } from './../view-transactions/view-transactions.component';
-import { EditTriggerService } from './../edit-triggers/edit-trigger.service';
-import { TriggerTableItem } from './../transactions.service';
-import { TriggerTableService } from './../transactions.service';
+import { AddTriggersComponent } from './../add-triggers/add-triggers.component';
+import { TriggerTableItem, TriggersService } from './../triggers.service';
+import { TransactionTableService } from './../transactions.service';
 import { AfterViewInit, Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,7 +14,6 @@ import {DomSanitizer} from '@angular/platform-browser';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { trigger } from '@angular/animations';
 
 
 
@@ -34,19 +31,18 @@ const TRIGGER_DATA: Transactions[] = [
   {triggerNumber: 3, triggerType: 'Timeframe', triggerSetting: '00:00-04:00',  editTrigger: 'edit'},
 ];
 
-/**
- * The Veracode Builds Component.
- *
- * Displays a table of all Veracode scans pulled into the application.
- * Empty sandbox names indicate a promoted build.
- */
+const REAL_TRIGGER_DATA: TriggerTableItem[] = [
+  {userID: 1, triggerID: 1, rule: "Over 5000"},
+  {userID: 1, triggerID: 2, rule: "Outside of Kansas"},
+  {userID: 1, triggerID: 3, rule: "00:00-4:00 "}
+];
+
+
 @Component({
   selector: 'app-view-triggers',
   templateUrl: './view-triggers.component.html',
   styleUrls: ['./view-triggers.component.scss']
 })
-
-
 export class ViewTriggersComponent implements OnInit {
 
 
@@ -110,10 +106,10 @@ export class ViewTriggersComponent implements OnInit {
   /**
    * The array of column names for the table to use
    */
-  displayedColumns: string[] = [/*'triggerNumber',*/ 'triggerType', 'triggerSetting', 'editTrigger'];
+  displayedColumns: string[] = ['triggerID', 'triggerSetting'];
 
 
-  constructor(public appTable: TriggerTableService, public dialog: MatDialog, public snackBar: MatSnackBar,
+  constructor(public triggers: TriggersService, public dialog: MatDialog, public snackBar: MatSnackBar,
               public iconRegistry: MatIconRegistry, public sanitizer: DomSanitizer, public router: Router,
               public activatedRoute: ActivatedRoute) {
     iconRegistry.addSvgIcon(
@@ -128,8 +124,8 @@ export class ViewTriggersComponent implements OnInit {
     this.snackBar.open('Attempting to refresh table...', 'Okay', {
       duration: 3000
     });
-    this.appTable.getTransaction().subscribe(data => {
-      this.dataSource.data = TRIGGER_DATA;
+    this.triggers.getTriggers().subscribe(data => {
+      this.dataSource.data = REAL_TRIGGER_DATA;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.snackBar.open('Table successfully loaded!', 'Okay', {
@@ -185,6 +181,18 @@ export class ViewTriggersComponent implements OnInit {
 
     toDashboard(){
       this.router.navigateByUrl('/app/dashboard');
+    }
+
+    toAddTrigger() {
+      const dialogRef = this.dialog.open(AddTriggersComponent, {
+        width: '45em'
+        //maxHeight: '90vh'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('dialog closed');
+        this.refreshTable();
+        this.selection.clear();
+      });
     }
 
   }

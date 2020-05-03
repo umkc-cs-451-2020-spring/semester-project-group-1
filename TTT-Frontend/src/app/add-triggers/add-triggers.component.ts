@@ -1,9 +1,9 @@
+import { TriggersService } from './../triggers.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 // import { MatSelectChange, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AddTriggerService } from './add-trigger.service';
 // import { Associate } from '../login/login-response.model';
 
 
@@ -182,7 +182,7 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
   // user: Associate = JSON.parse(this.session.getItem("user"));
   // lastModifiedByInput = new FormControl('', [Validators.required, Validators.pattern('^(D|d)(T|t)[0-9]{5,6}$')]);
 
-  constructor(public appService: AddTriggerService,
+  constructor(public triggers: TriggersService,
               public dialogRef: MatDialogRef<AddTriggersComponent>, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -281,7 +281,7 @@ endTimes: EndTime[] = [{value: '00:00-0', viewValue: '00:00'},
     this.triggerState.disable();
     this.triggerStartTime.disable();
     this.triggerEndTime.disable();
-    this.appService.addTriggers(this.states[0].value, this.startTimes[0].value, this.endTimes[0].value).subscribe(data => {
+    this.triggers.addTrigger("lol we r screwed").subscribe(data => {
       // this.AddTrigg = false;
       this.snackBar.open('Latest promoted build added', 'Okay', {
         duration: 3000

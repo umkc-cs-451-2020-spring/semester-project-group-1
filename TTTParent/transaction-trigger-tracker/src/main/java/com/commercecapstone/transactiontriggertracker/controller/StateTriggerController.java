@@ -39,22 +39,22 @@ public class StateTriggerController {
 	}
 	
 	// Add a state trigger
-	@PostMapping("/all")
-	public ResponseEntity<Object> addStateTrigger(@RequestBody @Valid @NonNull StateTriggerDomain inputTrigger){
-		return stateTriggerDao.addStateTrigger(inputTrigger);
+	@PostMapping("/add/{inputTriggerRule}")
+	public ResponseEntity<Object> addStateTrigger(@PathVariable String inputTriggerRule){
+		return stateTriggerDao.addStateTrigger(inputTriggerRule);
 	}
 	
 	// Update a state trigger
-	@PutMapping("/all")
+	@PutMapping("/update")
 	public ResponseEntity<Object> updateStateTrigger(@RequestBody @Valid @NonNull StateTriggerDomain inputTrigger){
 		return stateTriggerDao.updateStateTrigger(inputTrigger);
 		
 	}
 	
 	// Delete a state trigger based on triggerID and userID
-	@DeleteMapping("/{triggerID}/{userID}")
-	public ResponseEntity<Object> deleteStateTrigger(int triggerID, int userID) {
-		return stateTriggerDao.deleteStateTrigger(triggerID, userID);
+	@DeleteMapping("/delete/{triggerID}")
+	public ResponseEntity<Object> deleteStateTrigger(@PathVariable int triggerID) {
+		return stateTriggerDao.deleteStateTrigger(triggerID);
 	}
 	
 	
