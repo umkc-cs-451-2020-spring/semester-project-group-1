@@ -1,3 +1,4 @@
+import { EditTriggersComponent } from './../edit-triggers/edit-triggers.component';
 import { AddTriggersComponent } from './../add-triggers/add-triggers.component';
 import { TriggerTableItem, TriggersService } from './../triggers.service';
 import { TransactionTableService } from './../transactions.service';
@@ -106,7 +107,7 @@ export class ViewTriggersComponent implements OnInit {
   /**
    * The array of column names for the table to use
    */
-  displayedColumns: string[] = ['triggerID', 'triggerSetting'];
+  displayedColumns: string[] = ['triggerID', 'triggerSetting', 'editTrigger'];
 
 
   constructor(public triggers: TriggersService, public dialog: MatDialog, public snackBar: MatSnackBar,
@@ -125,7 +126,7 @@ export class ViewTriggersComponent implements OnInit {
       duration: 3000
     });
     this.triggers.getTriggers().subscribe(data => {
-      this.dataSource.data = REAL_TRIGGER_DATA;
+      this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.snackBar.open('Table successfully loaded!', 'Okay', {
@@ -194,5 +195,32 @@ export class ViewTriggersComponent implements OnInit {
         this.selection.clear();
       });
     }
+
+    toEditTrigger(selectedRow: TriggerTableItem) {
+      const dialogRef = this.dialog.open(EditTriggersComponent, {
+        width: '20em',
+        maxHeight: '90vh',
+        data: selectedRow
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('dialog closed');
+        this.refreshTable();
+        this.selection.clear();
+        });
+    }
+
+    deleteTrigger(inputTriggerID: number) {
+      if (confirm('Are you sure you want to delete?')) {
+      this.triggers.deleteTrigger(inputTriggerID).subscribe(result => {
+        this.refreshTable();
+        this.selection.clear();
+      }, (err) => {
+        this.snackBar.open(err, 'Okay', {
+          duration: 3000
+        });
+      });
+    }
+  }
 
   }

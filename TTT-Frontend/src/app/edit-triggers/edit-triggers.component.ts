@@ -139,77 +139,41 @@ export class EditTriggersComponent implements OnInit {
   // ];
 
 
-  // constructor(public dialogRef: MatDialogRef<EditTriggersComponent>,
-  //   @Inject(MAT_DIALOG_DATA) public data: TriggerTableItem,
-  //   public editTriggers: TriggersService,
-  //   public snackBar: MatSnackBar) { }
+  constructor(public dialogRef: MatDialogRef<EditTriggersComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: TriggerTableItem,
+    public editTriggers: TriggersService,
+    public snackBar: MatSnackBar) { }
 
-  // session = window.sessionStorage;
-  // // user: Associate = JSON.parse(this.session.getItem("user"));
-  // entryToEdit = this.data;
-
-  // functionality = new FormControl(this.entryToEdit.functionality, [Validators.maxLength(100)]);
-  // triggerID = new FormControl(this.entryToEdit.triggerID, [Validators.maxLength(100)]);
-  // currentSettings = new FormControl(this.entryToEdit.currentSettings, [Validators.maxLength(100)]);
-  // changeDate = false;
-
-  // // entryAppID = this.entryToEdit.appID;
-  // // entryBuildID = this.entryToEdit.buildID;
-  // // entrySandboxID = this.entryToEdit.sandboxID;
-  // // entrySandboxName = this.entryToEdit.sandboxName;
-
-  // // entryTriggerID = this.entryToEdit.triggerID;
-  // // entryFunctionality = this.entryToEdit.functionality;
-  // // entryCurrentSettings = this.entryToEdit.currentSettings;
-
+  session = window.sessionStorage;
+  // user: Associate = JSON.parse(this.session.getItem("user"));
+  entryToEdit = this.data;
+;
+  triggerRuleInput = new FormControl(this.entryToEdit.rule, [Validators.maxLength(100)]);
 
   ngOnInit(): void {
   }
 
+  updateTriggerEntry() {
+    // console.log("Last Static Scan: " + this.entryToEdit.lastStaticScan);
+    this.entryToEdit.rule = this.triggerRuleInput.value;
+    this.snackBar.open('Attempting to edit entry...');
+    this.editTriggers.editTrigger(this.entryToEdit).subscribe(
+      data => {
+        this.snackBar.open('Edit successful!', 'Okay', {
+          duration: 3000
+        }
 
-  // // enteredValue() {
-  // //   if (this.primaryLanguageInput.value !== undefined && this.primaryLanguageInput.value !== null && this.primaryLanguageInput.value !== "" && this.primaryLanguageInput.valid) {
-  // //     // console.log(this.primaryLanguageInput.value);
-  // //     return true;
-  // //   }
-  // //   else if (this.projectNameInput.value !== undefined && this.projectNameInput.value !== null && this.projectNameInput.value !== "" && this.projectNameInput.valid) {
-  // //     // console.log(this.projectNameInput.value);
-  // //     return true;
-  // //   }
-  // //   else {
-  // //     return false;
-  // //   }
-  // // }
-
-  // /**
-  //  * Updates build metadata with inputted FormControl values
-  //  */
-  // updateTriggerEntry() {
-  //   // console.log("Last Static Scan: " + this.entryToEdit.lastStaticScan);
-  //   this.entryToEdit.functionality = this.functionality.value;
-  //   this.entryToEdit.triggerID = this.triggerID.value;
-  //   this.entryToEdit.currentSettings = this.currentSettings.value;
-  //   this.snackBar.open('Attempting to edit entry...');
-  //   this.editTriggers.editEntry(this.entryToEdit).subscribe(
-  //     data => {
-  //       this.snackBar.open('Edit successful!', 'Okay', {
-  //         duration: 3000
-  //       }
-
-  //     );
-  //     }, (err) => {
-  //       this.snackBar.open(err, 'Okay', {
-  //         duration: 3000
-  //       });
-  //     }
-  //   );
+      );
+      }, (err) => {
+        this.snackBar.open(err, 'Okay', {
+          duration: 3000
+        });
+      }
+    );
 
 
-  //   this.dialogRef.close();
-  // }
-  // editEntry(entryToEdit: TriggerTableItem) {
-  //   throw new Error("Edit not completed.");
-  // }
+    this.dialogRef.close();
+  }
 }
 
 

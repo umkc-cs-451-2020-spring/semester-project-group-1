@@ -118,7 +118,7 @@ public class StateTriggerDao extends BaseDao{
 	public ResponseEntity<Object> updateStateTrigger(StateTriggerDomain inputTrigger) {
 	
 	        String typeQuery = "update State_trigger set trigger_rule = :inStateRule"
-	                		+ "WHERE Trigger_ID = :inTriggerID AND User_ID = :inUserID";
+	                		+ " WHERE Trigger_ID = :inTriggerID AND User_ID = :inUserID";
 	        
 	        Map<String, Object> params = new HashMap<String,Object>();
 	        params.put("inStateRule", inputTrigger.getRule());
