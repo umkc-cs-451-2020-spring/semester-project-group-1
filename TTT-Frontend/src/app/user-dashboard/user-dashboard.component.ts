@@ -16,9 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppRoutingModule } from '../app-routing.module';
+import * as XLSX from 'xlsx';
 // import { trigger } from '@angular/animations';
-
-
 
 @Component({
   selector: 'app-user-dashboard',
@@ -130,6 +129,19 @@ toViewNotifications() {
 
 toViewTriggers(){
   this.router.navigateByUrl('app/triggers');
+}
+
+exportToExcel(){
+  let worksheet: XLSX.WorkSheet;
+      let wsName: string;
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+
+      this.transactionService.getTransaction().subscribe(data => {
+        worksheet = XLSX.utils.json_to_sheet(data);
+        wsName = 'Transactions';
+        XLSX.utils.book_append_sheet(wb, worksheet, wsName);
+        XLSX.writeFile(wb, wsName + '.xlsx');
+      });
 }
 
 /*

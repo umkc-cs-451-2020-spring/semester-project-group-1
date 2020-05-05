@@ -41,7 +41,7 @@ create or replace TABLE notification(
 
 create or replace TABLE state_trigger(
 	Trigger_ID int PRIMARY KEY AUTO_INCREMENT,
-    User_ID int DEFAULT NULL UNIQUE,
+    User_ID int DEFAULT NULL,
     Trigger_rule varchar(255)
     /*CONSTRAINT FOREIGN KEY USER_ID1 (User_ID) REFERENCES user(User_ID)*/
 )engine = InnoDB;
