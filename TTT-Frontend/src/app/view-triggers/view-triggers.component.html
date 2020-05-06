@@ -1,0 +1,54 @@
+<mat-toolbar class="mat-typography">
+  <mat-toolbar-row class="header">
+    <span class="toolbar">
+      <h1>Commerce Trigger Tracker - Triggers</h1>
+    </span>
+    <span class="spacer"></span>
+    <span>
+      <button mat-icon-button matTooltip="Refresh Table" (click)="refreshTable()" aria-label="Resfresh Table">
+        <mat-icon aria-hidden="false" aria-label="Refresh Table">refresh</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Add New Trigger" (click)="toAddTrigger()" aria-label="Add New Trigger">
+        <mat-icon aria-hidden="false" aria-label="Refresh Table">add_circle</mat-icon>
+      </button>
+      <button mat-raised-button class="toolbarButton" (click)="toDashboard()">Return to dash</button>
+    </span>
+
+    <!--<div class = "logout">Logout</div>-->
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="triggerID">
+      <th mat-header-cell *matHeaderCellDef>Trigger ID</th>
+      <td mat-cell *matCellDef="let trigger"> {{trigger.triggerID}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="triggerSetting">
+      <th mat-header-cell *matHeaderCellDef>Trigger Setting</th>
+      <td mat-cell *matCellDef="let trigger"> {{trigger.rule}} </td>
+    </ng-container>
+
+    <!--
+    <ng-container matColumnDef="triggerNumber">
+      <th mat-header-cell *matHeaderCellDef>Trigger ID</th>
+      <td mat-cell *matCellDef="let trigger"> {{trigger.triggerNumber}} </td>
+    </ng-container>
+    -->
+
+    <ng-container matColumnDef="editTrigger">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let trigger">
+          <button mat-icon-button color="Primary" matTooltip="Edit Trigger" [matTooltipPosition]="abovePosition" (click)="toEditTrigger(trigger)" aria-label="Edit app">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="Primary" matTooltip="Delete Trigger" (click)="deleteTrigger(trigger.triggerID)" aria-label="Delete trigger">
+              <mat-icon>delete_forever</mat-icon>
+          </button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

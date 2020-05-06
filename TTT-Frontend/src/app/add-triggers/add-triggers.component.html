@@ -1,0 +1,72 @@
+<div class="main mat-typography">
+  <div>
+    <mat-vertical-stepper linear #stepper>
+
+      <mat-step>
+        <ng-template matStepLabel>Select Trigger Type</ng-template>
+        <div>
+          <h3>Would you like to add a trigger of type Category, State, or Timeframe?</h3>
+          <div class="button-row">
+            <button mat-raised-button color="primary" (click)= "categoryChosen = true; state = false; timeframe = false;" matStepperNext>Category</button>
+            <button mat-raised-button color="primary" (click)="state = true; categoryChosen = false; timeframe = false;" matStepperNext>State</button>
+            <button mat-raised-button color="primary" (click)="timeframe = true; categoryChosen = false; state = false;" matStepperNext>Timeframe</button>
+          </div>
+        </div>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Add Trigger Rule</ng-template>
+
+        <div *ngIf="categoryChosen === true">
+          <h3>Enter a category.</h3>
+            <div class="app-row">
+              <mat-form-field>
+                <input matInput placeholder="Category Name" [formControl]="categoryInput">
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)="addTrigger(categoryInput.value)">Add Category Trigger</button>
+            </div>
+        </div>
+
+
+        <div *ngIf="state === true">
+          <h3>Select a state.</h3>
+          <div class="app-row">
+            <mat-form-field>
+              <mat-select [formControl]="stateInput">
+                <mat-option *ngFor="let state of states" [value]="state.viewValue">
+                  {{state.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="addTrigger(stateInput.value)" >Add State Trigger</button>
+          </div>
+        </div>
+
+        <div *ngIf="timeframe === true">
+          <h3>Select a start time and end time.</h3>
+            <div class="promoted-row">
+            <mat-form-field>
+              <mat-select [formControl]="timeframeStart">
+                <mat-option *ngFor="let time of startTimes" [value]="time.viewValue">
+                  {{time.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select [formControl]="timeframeEnd">
+                <mat-option *ngFor="let time of endTimes" [value]="time.viewValue">
+                  {{time.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary" (click)="addTrigger(timeframeStart.value + '-' + timeframeEnd.value)" >Add Timerange Trigger</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+
+
+
+</div>

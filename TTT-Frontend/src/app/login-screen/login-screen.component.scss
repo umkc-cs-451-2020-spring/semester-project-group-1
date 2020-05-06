@@ -1,0 +1,62 @@
+.login-box{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5.5%;
+    max-width: 500px;
+    vertical-align: center;
+}
+
+.login-button{
+    margin: auto;
+    margin-top: 5%;
+    text-align: center;
+    background-color: #306237;
+    //color:#306237;
+}
+
+.header{
+  background-color: #306237;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  color: black;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.ErrorMessage{
+    color:red;
+    text-align: center;
+}
+
+img {
+    display: block;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.toolbar {
+    background-color: #306237;
+    height: 10%;
+    text-align: center;
+    padding-top: 25px;
+    font-size: 3vw;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #393F3A;
+}
+
+/*.mat-form-field {
+    display: inline-block;
+    accountID: relative;
+    text-align: center;
+}*/
+
+.mat-form-field-infix{
+    padding: 0px;
+}

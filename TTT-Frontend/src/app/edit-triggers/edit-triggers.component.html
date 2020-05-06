@@ -1,0 +1,13 @@
+<div class="main mat-typography">
+  <h2 class="edit-header">Edit Trigger</h2>
+
+  <div class="input-row">
+      <mat-form-field>
+        <mat-label>Trigger Rule</mat-label>
+          <input matInput placeholder="Trigger Rule" [formControl]="triggerRuleInput">
+      </mat-form-field>
+  </div>
+
+  <div class="input-row">
+    <button mat-raised-button color="primary" (click)="updateTriggerEntry()" type="submit">Submit Changes</button>
+  </div>
